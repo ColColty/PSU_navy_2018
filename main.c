@@ -5,8 +5,8 @@
 ** main
 */
 
-#include "my.h"
-#include "map.h"
+#include "include/my.h"
+#include "include/map.h"
 
 int print_usage(void)
 {

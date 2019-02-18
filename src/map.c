@@ -5,8 +5,8 @@
 ** Draw the map
 */
 
-#include "my.h"
-#include "map.h"
+#include "include/my.h"
+#include "include/map.h"
 
 int print_map(char *pathfile)
 {

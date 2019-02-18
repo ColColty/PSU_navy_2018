@@ -5,8 +5,8 @@
 ** navy
 */
 
-#include "my.h"
-#include "map.h"
+#include "include/my.h"
+#include "include/map.h"
 
 int navy(char * const *argv)
 {
