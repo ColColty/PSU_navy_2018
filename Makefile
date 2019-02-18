@@ -12,6 +12,7 @@ LIB_FILE	=	$(realpath ./lib/my/)
 TEST_SRC	=	$(realpath ./tests)
 
 SRC	=	$(SRC_DIR)/navy.c	\
+	$(SRC_DIR)/map.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 
@@ -64,7 +65,6 @@ tests_run:	re
 	gcovr
 
 %.o:	%.c
-	@echo "Compiling $@..."
 	@$(CC) -o $@ -c $< -W
 
 .PHONY:	all clean fclean re tests_run bonus debug

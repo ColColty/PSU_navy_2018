@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+#include "map.h"
 
 int print_usage(void)
 {
@@ -32,6 +33,6 @@ int main(int argc, char * const * argv)
         print_usage();
         return (0);
     }
-    navy();
+    navy(argv);
     return (0);
 }

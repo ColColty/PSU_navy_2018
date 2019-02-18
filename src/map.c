@@ -5,12 +5,21 @@
 ** Draw the map
 */
 
-#include "my.h"
-#include "map.h"
+#include "include/my.h"
+#include "include/map.h"
 
-int print_map(void)
+int print_map(char *pathfile)
 {
-    char **map = NULL;
+    int fd = 0;
+    char *buffer = NULL;
 
-    for (int i = 0; )
+    if (fd = open(pathfile, O_RDONLY) != 1) {
+        while (read(fd, buffer, 7) != 0)
+            my_putchar('X');
+    }
+    else
+    {
+        return (84);
+    }
+    
 }
