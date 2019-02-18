@@ -1,0 +1,32 @@
+language: c
+
+services: docker
+
+notification:
+  email:
+    recipients:
+      - tomas.forne-cappeau@epitech.eu
+      - paul.tardivel@epitech.eu
+    on_success: never
+    on_failure: always
+
+before_install:
+  - sudo apt update
+
+jobs:
+  include:
+    - stage: "Build"
+      name: "Building"
+      script: make
+    - stage: "Tests"
+      name: "Basic Tests"
+      script: ./basic_stages.sh
+
+before_deploy:
+  - sudo apt update
+
+deploy:
+  provider: script
+  script: ./deploy.sh
+  on:
+    branch: master
