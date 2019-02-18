@@ -34,9 +34,8 @@ $(NAME):	$(OBJ)
 clean:
 	make clean -C $(LIB_FILE)
 	@rm -f *.gc*
-	@rm -f peda*
-	@rm -f .gdb_history
 	@rm -f *.o
+	@rm -f $(SRC_DIR)/*.o
 
 fclean:	clean
 	rm -f $(NAME)

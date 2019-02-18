@@ -6,6 +6,19 @@
 */
 
 #include <criterion/criterion.h>
+#include <criterion/redirect.h>
+
+
+void redirect_all_std(void)
+{
+    cr_redirect_stdout();
+    cr_redirect_stderr();
+}
+
+TestSuite(
+    basic_tests,
+    .init=redirect_all_std
+);
 
 Test(basic_tests, no_arguments)
 {
@@ -14,6 +27,7 @@ Test(basic_tests, no_arguments)
     int ret_value = 0;
 
     ret_value = execve("./navy", argv, env);
+    printf("%d\n", ret_value);
     cr_assert_eq(ret_value, 84);
 }
 
@@ -24,6 +38,7 @@ Test(basic_tests, arguments_bad_type)
     int ret_value = 0;
 
     ret_value = execve("./navy", argv, env);
+    printf("%d\n", ret_value);
     cr_assert_eq(ret_value, 84);
 }
 
@@ -34,6 +49,7 @@ Test(basic_tests, arguments_good_and_bad_type)
     int ret_value = 0;
 
     ret_value = execve("./navy", argv, env);
+    printf("%d\n", ret_value);
     cr_assert_eq(ret_value, 84);
 }
 
@@ -44,6 +60,7 @@ Test(basic_tests, arguments_NULL)
     int ret_value = 0;
 
     ret_value = execve("./navy", argv, env);
+    printf("%d\n", ret_value);
     cr_assert_eq(ret_value, 84);
 }
 
@@ -54,5 +71,6 @@ Test(basic_tests, description)
     int ret_value = 0;
 
     ret_value = execve("./navy", argv, env);
-    cr_assert_eq(ret_value, 84);
+    printf("%d\n", ret_value);
+    cr_assert_eq(ret_value, 0);
 }
