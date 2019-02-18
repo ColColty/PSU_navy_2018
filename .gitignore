@@ -3,6 +3,4 @@ unit_tests
 *.o
 libmy.a
 *.gc*
-.vscode.travis.yml
-deploy.sh
-
+.vscode

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+echo ".travis.yml\n\
+deploy.sh" >> .gitignore
+
+git remote add blih git@git.epitech.eu:/paul.tardivel@epitech.eu/PSU_navy_2018
+
+git push blih master
