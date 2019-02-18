@@ -1,0 +1,71 @@
+##
+## EPITECH PROJECT, 2018
+## Makefile
+## File description:
+## Makefile
+##
+
+SRC_DIR	=	$(realpath ./src)
+
+LIB_FILE	=	$(realpath ./lib/my/)
+
+TEST_SRC	=	$(realpath ./tests)
+
+SRC	=	$(SRC_DIR)/	\
+
+TESTS	=	$(TEST_SRC)/basic_tests.c	\
+
+NAME	=	navy
+
+MAIN_SRC	=	main.c
+
+LIB	=	-L$(LIB_FILE) -lmy
+
+INCLUDE	=	-I./include
+
+OBJ	=	$(SRC:.c=.o)
+
+all:	$(NAME)
+
+$(NAME):	$(OBJ)
+	make -C $(LIB_FILE)
+	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB)
+
+clean:
+	make clean -C $(LIB_FILE)
+	@rm -f *.gc*
+	@rm -f peda*
+	@rm -f .gdb_history
+	@rm -f *.o
+
+fclean:	clean
+	rm -f $(NAME)
+	rm -f unit_tests
+	make fclean -C $(LIB_FILE)
+
+re:	fclean all
+
+precise:
+	make -C $(LIB_FILE)
+	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) -Wall -Wextra
+
+bonus:	$(OBJ)
+	make -C $(LIB_FILE)
+	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) -DBONUS
+
+debug:	$(OBJ)
+	make -C $(LIB_FILE)
+	gcc -o $(NAME) -DDEBUG $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) -DDEBUG -g3
+
+tests_run:	re
+	gcc -c $(SRC) --coverage
+	gcc -c $(TESTS) $(INCLUDE)
+	gcc -o unit_tests *.o -lcriterion -lgcov
+	./unit_tests --always-succeed
+	gcovr
+
+%.o:	%.c
+	@echo "Compiling $@..."
+	@$(CC) -o $@ -c $< -W
+
+.PHONY:	all clean fclean re tests_run bonus debug

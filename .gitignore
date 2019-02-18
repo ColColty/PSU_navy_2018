@@ -1,0 +1,6 @@
+a.out
+unit_tests
+*.o
+libmy.a
+*.gc*
+.vscode
