@@ -6,6 +6,7 @@ notification:
   email:
     recipients:
       - tomas.forne-cappeau@epitech.eu
+      - paul.tardivel@epitech.eu
     on_success: never
     on_failure: always
 
@@ -13,9 +14,7 @@ jobs:
   include:
     - stage: "Build"
       name: "Building"
-      script:
-        - make -C ./lib/my
-        - gcc -o navy main.c src/navy.c src/map.c -I./include -L./lib/my -lmy
+      script: make
     - stage: "Tests"
       name: "Basic Tests"
       script: ./basic_tests.sh navy

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-make re
+make
 
 EXEC=$1
 COUNTER=0
