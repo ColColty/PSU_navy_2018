@@ -19,6 +19,6 @@ int print_map(char *pathfile)
     }
     else
     {
-        return (84);
+        return (84); 
     }
 }
