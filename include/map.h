@@ -23,4 +23,4 @@ typedef struct map {
 
 int print_map(char *pathfile);
 
-#endif /* !MAP_H_ */
+#endif

@@ -1,17 +1,13 @@
 language: c
 
-services: docker
-
 notification:
   email:
     recipients:
       - tomas.forne-cappeau@epitech.eu
       - paul.tardivel@epitech.eu
+      - tomasforne1@gmail.com
     on_success: never
     on_failure: always
-
-before_install:
-  - sudo apt update
 
 jobs:
   include:
@@ -21,9 +17,6 @@ jobs:
     - stage: "Tests"
       name: "Basic Tests"
       script: ./basic_tests.sh navy
-
-before_deploy:
-  - sudo apt update
 
 deploy:
   provider: script

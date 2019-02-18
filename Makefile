@@ -65,6 +65,6 @@ tests_run:	re
 	gcovr
 
 %.o:	%.c
-	@$(CC) -o $@ -c $< -W
+	@$(CC) -o $@ -c $< -W $(INCLUDE)
 
 .PHONY:	all clean fclean re tests_run bonus debug

@@ -20,7 +20,7 @@ int print_usage(void)
 
 int error_handle(int argc, char * const * argv)
 {
-    if (argc <= 2)
+    if (argc < 2)
         return (1);
     return (0);
 }
