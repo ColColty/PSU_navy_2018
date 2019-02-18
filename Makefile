@@ -11,7 +11,7 @@ LIB_FILE	=	$(realpath ./lib/my/)
 
 TEST_SRC	=	$(realpath ./tests)
 
-SRC	=	$(SRC_DIR)/	\
+SRC	=	$(SRC_DIR)/navy.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 
@@ -55,12 +55,12 @@ bonus:	$(OBJ)
 
 debug:	$(OBJ)
 	make -C $(LIB_FILE)
-	gcc -o $(NAME) -DDEBUG $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) -DDEBUG -g3
+	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) -DDEBUG -g3
 
 tests_run:	re
 	gcc -c $(SRC) --coverage
 	gcc -c $(TESTS) $(INCLUDE)
-	gcc -o unit_tests *.o -lcriterion -lgcov
+	gcc -o unit_tests *.o -lcriterion -lgcov -g3
 	./unit_tests --always-succeed
 	gcovr
 
