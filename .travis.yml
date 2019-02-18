@@ -20,7 +20,7 @@ jobs:
       script: make
     - stage: "Tests"
       name: "Basic Tests"
-      script: ./basic_stages.sh
+      script: ./basic_tests.sh navy
 
 before_deploy:
   - sudo apt update

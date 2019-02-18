@@ -21,5 +21,4 @@ int print_map(char *pathfile)
     {
         return (84);
     }
-    
 }
