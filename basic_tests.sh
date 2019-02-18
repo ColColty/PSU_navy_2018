@@ -1,16 +1,19 @@
 #!/bin/sh
 
-make
+make re
 
 EXEC=$1
 COUNTER=0
 
 test_arguments()
 {
-    ./$EXEC $@
+    echo "timeout 2 ./$EXEC $@"
+    timeout 2 ./$EXEC $@
     RET=`echo $?`
 
-    if [ $RET -ne 84 ] && [ $RET -ne 0 ]; then
+    if [ $RET -eq 124 ]; then
+        echo "This is a timeout of 2secs"
+    elif [ $RET -ne 84 ] && [ $RET -ne 0 ]; then
         echo "Failed with code: $RET"
         exit $RET
     else
