@@ -14,7 +14,7 @@ jobs:
   include:
     - stage: "Build"
       name: "Building"
-      script: gcc -o navy main.c navy.c map.c -I./include -L./lib/my -lmy
+      script: gcc -o navy main.c src/navy.c src/map.c -I./include -L./lib/my -lmy
     - stage: "Tests"
       name: "Basic Tests"
       script: ./basic_tests.sh navy
