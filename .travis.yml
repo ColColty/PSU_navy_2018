@@ -10,9 +10,6 @@ notification:
     on_success: never
     on_failure: always
 
-before_install:
-  - sudo apt update
-
 jobs:
   include:
     - stage: "Build"
@@ -21,9 +18,6 @@ jobs:
     - stage: "Tests"
       name: "Basic Tests"
       script: ./basic_tests.sh navy
-
-before_deploy:
-  - sudo apt update
 
 deploy:
   provider: script
