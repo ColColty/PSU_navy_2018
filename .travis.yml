@@ -1,7 +1,5 @@
 language: c
 
-services: docker
-
 notification:
   email:
     recipients:
