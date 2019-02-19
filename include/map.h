@@ -20,6 +20,7 @@ typedef struct info_s {
     int start_y;
     int finish;
     char nb_replace;
+    char **map;
 } info_t;
 
 int recover_ship_position(char *filepath);

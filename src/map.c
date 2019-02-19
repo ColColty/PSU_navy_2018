@@ -11,9 +11,8 @@
 int change_line(char *position, int i)
 {
     while (position[i] != '\n') {
-        if (i == '\0')
+        if (position[i] == '\0')
             return (i);
-        else
             i++;
     }
     i += 1;
@@ -25,13 +24,12 @@ char **add_position2(char **map, info_t *info)
     
     int i = info->start_y - 1;
     int k = info->start_x * 2;
-    my_put_nbr(info->finish);
-    my_putchar('\n');
 
-    while (k != info->finish) {
+    while (k <= info->finish * 2) {
         map[i][k] = info->nb_replace;
-        k++;
+        k += 2;
     }
+    return (map);
 }
 
 char **add_position(char **map, info_t *info)
@@ -43,9 +41,10 @@ char **add_position(char **map, info_t *info)
         map[i][k] = info->nb_replace;
         i++;
     }
+    return (map);
 }
 
-char **get_position(char **map, char *position, info_t *info)
+char **get_position(char *position, info_t *info)
 {
     int i = 0;
     
@@ -56,18 +55,17 @@ char **get_position(char **map, char *position, info_t *info)
             info->start_x = position[i] - 65;
             info->start_y = position[i + 1] - 48;
             info->finish = position[i + 4] - 48;
-            add_position(map, info);
+            add_position(info->map, info);
             i = change_line(position, i);
         }
-        else {
+        else { 
             info->start_x = position[i] - 65;
             info->start_y = position[i + 1] - 48;
-            info->finish = position[i + 3] - position[i];
-            add_position2(map, info);
+            info->finish = position[i + 3] - 65;
+            add_position2(info->map, info);
             i = change_line(position, i);
         }
     }
-    return (map);
 }
 
 char **print_the_map(char **map)
@@ -86,20 +84,19 @@ char **print_the_map(char **map)
     }
 }
 
-char **create_the_map(void)
+char **create_the_map(info_t *info)
 {
-    char **map = malloc(sizeof(char *) * 128);
+    info->map = malloc(sizeof(char *) * 128);
     int i = 0;
     int k = 0;
 
     for (i = 0; i != 8; i++) {
-        map[i] = malloc(sizeof(char) * 16);
+        info->map[i] = malloc(sizeof(char) * 16);
         for (k = 0; k != 16; k += 2) {
-            map[i][k] = '.';
-            map[i][k + 1] = ' ';
+            info->map[i][k] = '.';
+            info->map[i][k + 1] = ' ';
         }
     }
-    return (map);
 }
 
 int recover_ship_position(char *filepath)
@@ -107,7 +104,6 @@ int recover_ship_position(char *filepath)
     info_t info;
     char *buffer = NULL;
     int fd = open(filepath, O_RDONLY);
-    char **map;
 
     if (fd == -1)
         return (84);
@@ -115,9 +111,8 @@ int recover_ship_position(char *filepath)
     read(fd, buffer, 32);
     buffer[33] = '\0';
     close(fd);
-    map = create_the_map();
-    print_the_map(map);
-    //map = get_position(map, buffer, &info);
-    //print_the_map(map);
+    create_the_map(&info);
+    get_position(buffer, &info);
+    print_the_map(info.map);
     return (0);
 }
