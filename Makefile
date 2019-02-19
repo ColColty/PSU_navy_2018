@@ -24,15 +24,13 @@ LIB	=	-L$(LIB_FILE) -lmy -g3
 
 INCLUDE	=	-I./include
 
-CFLAGS	=	-std=c99
-
 OBJ	=	$(SRC:.c=.o)
 
 all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	make -C $(LIB_FILE)
-	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) $(CFLAGS)
+	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB)
 
 clean:
 	make clean -C $(LIB_FILE)

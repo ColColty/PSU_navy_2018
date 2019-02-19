@@ -22,7 +22,6 @@ int change_line(char *position, int i)
 
 char **add_position2(char **map, info_t *info)
 {
-    
     int i = info->start_y - 1;
     int k = info->start_x * 2;
     my_put_nbr(info->finish);
@@ -48,7 +47,7 @@ char **add_position(char **map, info_t *info)
 char **get_position(char **map, char *position, info_t *info)
 {
     int i = 0;
-    
+
     while (position[i] != '\0') {
         info->nb_replace = position[i];
         i += 2;
