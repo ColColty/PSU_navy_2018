@@ -1,32 +1,40 @@
 language: c
 
-services: docker
+services:
+  - docker
 
 notification:
   email:
     recipients:
+      - tomasforne1@gmail.com
       - tomas.forne-cappeau@epitech.eu
       - paul.tardivel@epitech.eu
     on_success: never
     on_failure: always
 
 before_install:
-  - sudo apt update
+  - docker pull epitechcontent/epitest-docker
 
 jobs:
   include:
-    - stage: "Build"
+    - stage: Build
       name: "Building"
-      script: make
-    - stage: "Tests"
+      script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && make"
+      after_script: docker stop epitechcontent/epitest-docker
+    - stage: Tests
       name: "Basic Tests"
-      script: ./basic_tests.sh navy
+      script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && ./basic_tests.sh navy"
+      after_script: docker stop epitechcontent/epitest-docker
+    - script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && make tests_run"
+      after_script: docker stop epitechcontent/epitest-docker
+      name: "Make the tests"
+    - stage: Deployment
+      name: "Push to blih repo"
+      script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && ./deploy.sh"
+      after_script: docker stop epitechcontent/epitest-docker
 
-before_deploy:
-  - sudo apt update
-
-deploy:
-  provider: script
-  script: ./deploy.sh
-  on:
-    branch: master
+stages:
+  - Build
+  - Tests
+  - name: Deployment
+    if: branch = master
