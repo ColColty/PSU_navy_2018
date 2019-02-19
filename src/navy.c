@@ -5,7 +5,11 @@
 ** navy
 */
 
-int navy(void)
+#include "my.h"
+#include "map.h"
+
+int navy(char * const *argv)
 {
+    recover_ship_position(argv[1]);
     return (0);
 }

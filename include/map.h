@@ -8,9 +8,21 @@
 #ifndef MAP_H_
 #define MAP_H_
 
-typedef struct map {
-    char **map_player_one;
-    char **map_player_two;
-} map_t;
+#include <stdarg.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdlib.h>
+
+typedef struct info_s {
+    int start_x;
+    int start_y;
+    int finish;
+    char nb_replace;
+} info_t;
+
+int recover_ship_position(char *filepath);
+int navy(char * const *argv);
 
 #endif /* !MAP_H_ */

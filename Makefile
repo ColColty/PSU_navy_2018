@@ -12,6 +12,7 @@ LIB_FILE	=	$(realpath ./lib/my/)
 TEST_SRC	=	$(realpath ./tests)
 
 SRC	=	$(SRC_DIR)/navy.c	\
+	$(SRC_DIR)/map.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 
@@ -19,9 +20,11 @@ NAME	=	navy
 
 MAIN_SRC	=	main.c
 
-LIB	=	-L$(LIB_FILE) -lmy
+LIB	=	-L$(LIB_FILE) -lmy -g3
 
 INCLUDE	=	-I./include
+
+CFLAGS	=	-std=c99
 
 OBJ	=	$(SRC:.c=.o)
 
@@ -29,7 +32,7 @@ all:	$(NAME)
 
 $(NAME):	$(OBJ)
 	make -C $(LIB_FILE)
-	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB)
+	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) $(CFLAGS)
 
 clean:
 	make clean -C $(LIB_FILE)
@@ -64,7 +67,6 @@ tests_run:	re
 	gcovr
 
 %.o:	%.c
-	@echo "Compiling $@..."
-	@$(CC) -o $@ -c $< -W
+	@$(CC) -o $@ -c $< -W $(INCLUDE)
 
 .PHONY:	all clean fclean re tests_run bonus debug

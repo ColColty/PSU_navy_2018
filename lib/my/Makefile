@@ -8,7 +8,10 @@
 SRC	=	my_putchar.c	\
 	my_putstr.c	\
 	my_strlen.c	\
-	my_strcmp.c
+	my_strcmp.c \
+	my_put_nbr.c \
+	my_show_word_array.c \
+	my_atoi.c
 
 OBJ	=	$(SRC:.c=.o)
 
