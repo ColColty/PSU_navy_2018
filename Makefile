@@ -59,9 +59,9 @@ debug:	$(OBJ)
 	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) -DDEBUG -g3
 
 tests_run:	re
-	gcc -c $(SRC) --coverage
+	gcc -c $(SRC) $(INCLUDE) --coverage
 	gcc -c $(TESTS) $(INCLUDE)
-	gcc -o unit_tests *.o -lcriterion -lgcov -g3
+	gcc -o unit_tests *.o -lcriterion -lgcov -g3 $(LIB)
 	./unit_tests --always-succeed
 	gcovr
 
