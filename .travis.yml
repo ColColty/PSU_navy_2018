@@ -25,9 +25,9 @@ jobs:
       name: "Basic Tests"
       script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && ./basic_tests.sh navy"
       after_script: docker stop epitechcontent/epitest-docker
-      - script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && make tests_run"
-      name: "Make the tests"
+    - script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && make tests_run"
       after_script: docker stop epitechcontent/epitest-docker
+      name: "Make the tests"
     - stage: Deployment
       name: "Push to blih repo"
       script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && ./deploy.sh"
