@@ -9,7 +9,7 @@ notification:
       - tomasforne1@gmail.com
       - tomas.forne-cappeau@epitech.eu
       - paul.tardivel@epitech.eu
-    on_success: always
+    on_success: never
     on_failure: always
 
 before_install:
@@ -24,6 +24,9 @@ jobs:
     - stage: Tests
       name: "Basic Tests"
       script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && ./basic_tests.sh navy"
+      after_script: docker stop epitechcontent/epitest-docker
+      - script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && make tests_run"
+      name: "Make the tests"
       after_script: docker stop epitechcontent/epitest-docker
     - stage: Deployment
       name: "Push to blih repo"
