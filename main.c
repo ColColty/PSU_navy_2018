@@ -27,8 +27,8 @@ int error_handle(int argc, char * const * argv)
 
 int main(int argc, char * const * argv)
 {
-    if (error_handle(argc, argv))
-        return (84);
+    //if (error_handle(argc, argv))
+    //    return (84);
     if (!my_strcmp(argv[1], "-h")) {
         print_usage();
         return (0);

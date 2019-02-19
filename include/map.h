@@ -15,12 +15,14 @@
 #include <sys/stat.h>
 #include <stdlib.h>
 
-typedef struct map {
-    char **map_player_one;
-    char **map_player_two;
-} map_t;
+typedef struct info_s {
+    int start_x;
+    int start_y;
+    int finish;
+    char nb_replace;
+} info_t;
 
-
-int print_map(char *pathfile);
+int recover_ship_position(char *filepath);
+int navy(char * const *argv);
 
 #endif /* !MAP_H_ */

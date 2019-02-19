@@ -10,6 +10,6 @@
 
 int navy(char * const *argv)
 {
-    print_map(argv[1]);
+    recover_ship_position(argv[1]);
     return (0);
 }

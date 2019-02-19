@@ -20,7 +20,7 @@ NAME	=	navy
 
 MAIN_SRC	=	main.c
 
-LIB	=	-L$(LIB_FILE) -lmy
+LIB	=	-L$(LIB_FILE) -lmy -g3
 
 INCLUDE	=	-I./include
 
