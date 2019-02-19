@@ -25,4 +25,4 @@ typedef struct info_s {
 int recover_ship_position(char *filepath);
 int navy(char * const *argv);
 
-#endif /* !MAP_H_ */
+#endif
