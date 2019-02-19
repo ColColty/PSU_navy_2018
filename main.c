@@ -33,6 +33,6 @@ int main(int argc, char * const * argv)
         print_usage();
         return (0);
     }
-    navy(argv);
+    navy(argc, argv);
     return (0);
 }
