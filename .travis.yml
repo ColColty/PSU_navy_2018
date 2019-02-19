@@ -1,25 +1,35 @@
 language: c
 
+services:
+  - docker
+
 notification:
   email:
     recipients:
+      - tomasforne1@gmail.com
       - tomas.forne-cappeau@epitech.eu
       - paul.tardivel@epitech.eu
-      - tomasforne1@gmail.com
-    on_success: never
+    on_success: always
     on_failure: always
+
+before_install:
+  - docker pull epitechcontent/epitest-docker
 
 jobs:
   include:
     - stage: "Build"
       name: "Building"
-      script: make
+      script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && make"
+      after_script: docker stop epitechcontent/epitest-docker
     - stage: "Tests"
       name: "Basic Tests"
-      script: ./basic_tests.sh navy
+      script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && ./basic_tests.sh navy"
+      after_script: docker stop epitechcontent/epitest-docker
+
 
 deploy:
   provider: script
-  script: ./deploy.sh
+  script: docker run -c "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && ./deploy.sh"
+  after_script: docker stop epitechcontent/epitest-docker
   on:
     branch: master
