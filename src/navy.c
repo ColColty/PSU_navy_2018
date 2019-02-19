@@ -16,6 +16,6 @@ int navy(int argc, char * const *argv)
         player1(argv, &com);
     else if (argc == 3)
         player2(argv, &com);
-    print_map(argv[1]);
+    recover_ship_position(argv[1]);
     return (0);
 }
