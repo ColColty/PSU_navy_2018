@@ -13,6 +13,7 @@ TEST_SRC	=	$(realpath ./tests)
 
 SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/map.c	\
+	$(SRC_DIR)/game.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 
