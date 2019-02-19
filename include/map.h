@@ -23,6 +23,5 @@ typedef struct info_s {
 } info_t;
 
 int recover_ship_position(char *filepath);
-int navy(char * const *argv);
 
 #endif
