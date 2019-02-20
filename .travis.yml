@@ -23,19 +23,17 @@ jobs:
     - stage: Build
       name: "Building"
       script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make"
-      after_script: docker stop ${DOCKER_REPO}
     - stage: Tests
       name: "Basic Tests"
       script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./basic_tests.sh navy"
-      after_script: docker stop ${DOCKER_REPO}
     - script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make tests_run"
-      after_script: docker stop ${DOCKER_REPO}
       name: "Make the tests"
     - stage: Deployment
       name: "Push to blih repo"
       script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./deploy.sh"
-      after_script: docker stop ${DOCKER_REPO}
 
 stages:
   - Build
   - Tests
+  - name: Deployment
+    if: branch = deployment
