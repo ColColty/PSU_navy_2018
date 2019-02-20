@@ -21,7 +21,8 @@ int navy(int argc, char * const *argv)
         usleep(usecs);
         send_signal(&com, &trans);
     } else if (argc == 3) {
-        if (connect_player2(argv, &com, &trans))
+        com.attack_pid = my_atoi(argv[1]);
+        if (connect_player2(&com, &trans))
             return (1);
         recieve_signal();
     }

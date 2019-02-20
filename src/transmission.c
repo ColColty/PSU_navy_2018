@@ -10,9 +10,8 @@
 
 int send_signal(connection_t *com, transmissions_t *game)
 {
-    if (my_send_nbr_base(game->user_input[0], "01", com) == -1)
-        return (-1);
-    if (my_send_nbr_base(game->user_input[1], "01", com) == -1)
+    if (my_send_nbr_base(game->user_input[0], "01", com) == -1
+    || my_send_nbr_base(game->user_input[1], "01", com) == -1)
         return (-1);
     return (0);
 }
@@ -27,8 +26,6 @@ char *signal_decoder(int sig, siginfo_t *info, void *context)
         number[i++] = '0';
     else if (sig == 12)
         number[i++] = '1';
-    number[i] = '\0';
-    printf("%s\n", number);
     if (i > 7) {
         number[i] = '\0';
         my_revstr(number);
@@ -48,6 +45,9 @@ void recieve_signal(void)
     for (int i = 0; i < 16; i++) {
         for (int k = 0; k < 2; k++)
             sigaction(sig[k], &sa, NULL);
-        pause();
+        #ifdef UNIT_TESTS
+        #else
+            pause();
+        #endif
     }
 }
