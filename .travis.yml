@@ -39,5 +39,3 @@ jobs:
 stages:
   - Build
   - Tests
-  - name: Deployment
-    if: branch = master
