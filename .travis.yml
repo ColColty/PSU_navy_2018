@@ -3,7 +3,7 @@ language: c
 services:
   - docker
 
-notification:
+notifications:
   email:
     recipients:
       - tomasforne1@gmail.com
