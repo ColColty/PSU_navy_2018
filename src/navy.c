@@ -11,11 +11,20 @@
 int navy(int argc, char * const *argv)
 {
     connection_t com;
+    transmissions_t trans;
+    unsigned int usecs = 200000;
 
-    if (argc == 2)
-        player1(argv, &com);
-    else if (argc == 3)
-        player2(argv, &com);
+    if (argc == 2) {
+        if (connect_player1(&com, &trans))
+            return (1);
+        trans.user_input = "F1";
+        usleep(usecs);
+        send_signal(&com, &trans);
+    } else if (argc == 3) {
+        if (connect_player2(argv, &com, &trans))
+            return (1);
+        recieve_signal(&com, &trans);
+    }
     recover_ship_position(argv[1]);
     return (0);
 }

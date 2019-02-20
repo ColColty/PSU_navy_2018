@@ -13,7 +13,9 @@ TEST_SRC	=	$(realpath ./tests)
 
 SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/map.c	\
-	$(SRC_DIR)/game.c	\
+	$(SRC_DIR)/signal.c	\
+	$(SRC_DIR)/transmission.c	\
+	$(SRC_DIR)/communication.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 
@@ -56,7 +58,7 @@ bonus:	$(OBJ)
 
 debug:	$(OBJ)
 	make -C $(LIB_FILE)
-	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) -DDEBUG -g3
+	gcc -o $(NAME) $(MAIN_SRC) $(SRC) $(INCLUDE) $(LIB) -DTESTS -g3
 
 tests_run:	re
 	gcc -c $(SRC) $(INCLUDE) --coverage
