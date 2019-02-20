@@ -40,14 +40,8 @@ void binary_interpreter(char *number)
 
     for (int i = 0; i < 16; i++)
         if (!my_strcmp(number, array[i]->binary_correspond)) {
-            #ifdef TESTS
-                printf("%s equal to %s and the character is %c\n", number, array[i]->binary_correspond, array[i]->character);
-            #endif
             global_sig.attacant_move[k++] = array[i]->character;
         }
-    #ifdef TESTS
-        printf("The letter is %s\n", global_sig.attacant_move);
-    #endif
     if (k > 1)
         k = 0;
 }
@@ -56,7 +50,4 @@ void recupering_global(connection_t *connect, transmissions_t *trans)
 {
     connect->attack_pid = (int) global_sig.pid_attacant;
     trans->attacant_input = (char *) global_sig.attacant_move;
-    #ifdef TESTS
-        printf("The pid is %d, and the move was %s", connect->attack_pid, trans->attacant_input);
-    #endif
 }

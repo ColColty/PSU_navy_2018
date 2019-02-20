@@ -11,13 +11,7 @@
 void send_signal(connection_t *com, transmissions_t *game)
 {
     my_send_nbr_base(game->user_input[0], "01", com);
-    #ifdef TESTS
-        printf("$$ Signal for letter %c was send !\n", game->user_input[0]);
-    #endif
     my_send_nbr_base(game->user_input[1], "01", com);
-    #ifdef TESTS
-        printf("$$ Signal for number %c was sended !\n", game->user_input[1]);
-    #endif
 }
 
 void signal_decoder(int sig, siginfo_t *info, void *context)
@@ -30,10 +24,6 @@ void signal_decoder(int sig, siginfo_t *info, void *context)
         number[i++] = '0';
     else if (sig == 12)
         number[i++] = '1';
-    #ifdef TESTS
-        number[i] = '\0';
-        printf("$$ Number recieved ! Adding : %s\n", number);
-    #endif
     if (i > 7) {
         number[i] = '\0';
         my_revstr(number);

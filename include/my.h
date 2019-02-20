@@ -8,9 +8,6 @@
 #ifndef MY_H_
 #define MY_H_
 
-#ifdef TESTS
-    #include <stdio.h>
-#endif
 #include <stddef.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -40,7 +37,8 @@ int my_revstr(char *src);
 
 int navy(int argc, char * const *argv);
 int connect_player1(connection_t *com, transmissions_t *trans);
-int connect_player2(char * const * argv, connection_t *com, transmissions_t *trans);
+int connect_player2(char * const * argv, connection_t *com,
+transmissions_t *trans);
 void recieve_signal(connection_t *com, transmissions_t *game);
 void send_signal(connection_t *com, transmissions_t *game);
 void binary_interpreter(char *number);

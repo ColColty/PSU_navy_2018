@@ -6,7 +6,7 @@
 */
 
 #ifndef TRANSMISSION_H
-	#define TRANSMISSION_H
+#define TRANSMISSION_H
 
 #include <signal.h>
 #include <sys/types.h>

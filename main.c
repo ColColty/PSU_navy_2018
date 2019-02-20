@@ -13,8 +13,10 @@ int print_usage(void)
     my_putstr("USAGE:\n");
     my_putstr("\t./navy [first_player_pid] navy_positions\n");
     my_putstr("DESCRIPTION\n");
-    my_putstr("\tfirst_player_pid: onlyfor the 2nd player. pid of the first player.\n");
-    my_putstr("\tnavy_positions: file representing the positions of the ships.\n");
+    my_putstr("\tfirst_player_pid: onlyfor the 2nd player.");
+    my_putstr(" pid of the first player.\n");
+    my_putstr("\tnavy_positions: file representing the positions");
+    my_putstr(" of the ships.\n");
     return (0);
 }
 
