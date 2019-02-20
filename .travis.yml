@@ -11,26 +11,30 @@ notifications:
     on_success: never
     on_failure: always
 
-before_install:
-  - docker pull epitechcontent/epitest-docker
+env:
+  global:
+    - DOCKER_REPO=epitechcontent/epitest-docker
+
+install:
+  - docker pull ${DOCKER_REPO}
 
 jobs:
   include:
     - stage: Build
       name: "Building"
-      script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && make"
-      after_script: docker stop epitechcontent/epitest-docker
+      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make"
+      after_script: docker stop ${DOCKER_REPO}
     - stage: Tests
       name: "Basic Tests"
-      script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && ./basic_tests.sh navy"
-      after_script: docker stop epitechcontent/epitest-docker
-    - script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && make tests_run"
-      after_script: docker stop epitechcontent/epitest-docker
+      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./basic_tests.sh navy"
+      after_script: docker stop ${DOCKER_REPO}
+    - script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make tests_run"
+      after_script: docker stop ${DOCKER_REPO}
       name: "Make the tests"
     - stage: Deployment
       name: "Push to blih repo"
-      script: docker run -v "$PWD:/app" epitechcontent/epitest-docker bash -c "cd /app && ./deploy.sh"
-      after_script: docker stop epitechcontent/epitest-docker
+      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./deploy.sh"
+      after_script: docker stop ${DOCKER_REPO}
 
 stages:
   - Build
