@@ -18,6 +18,7 @@ SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/communication.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
+	$(TEST_SRC)/transmission_tests.c	\
 
 NAME	=	navy
 
@@ -54,16 +55,16 @@ precise:
 
 bonus:	$(OBJ)
 	make -C $(LIB_FILE)
-	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) -DBONUS
+	gcc -o $(NAME) $(MAIN_SRC) $(SRC) $(INCLUDE) $(LIB) -DBONUS
 
 debug:	$(OBJ)
 	make -C $(LIB_FILE)
 	gcc -o $(NAME) $(MAIN_SRC) $(SRC) $(INCLUDE) $(LIB) -DTESTS -g3
 
 tests_run:	re
-	gcc -c $(SRC) $(INCLUDE) --coverage
+	gcc -c $(SRC) $(INCLUDE) -DUNIT_TESTS --coverage
 	gcc -c $(TESTS) $(INCLUDE)
-	gcc -o unit_tests *.o -lcriterion -lgcov -g3 $(LIB)
+	gcc -o unit_tests *.o -lcriterion -lgcov $(LIB)
 	./unit_tests --always-succeed
 	gcovr
 

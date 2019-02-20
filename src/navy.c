@@ -23,8 +23,10 @@ int navy(int argc, char * const *argv)
     } else if (argc == 3) {
         if (connect_player2(argv, &com, &trans))
             return (1);
-        recieve_signal(&com, &trans);
+        recieve_signal();
     }
+    my_putstr(trans.attacant_input);
+    my_putchar('\n');
     recover_ship_position(argv[1]);
     return (0);
 }
