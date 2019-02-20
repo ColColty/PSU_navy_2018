@@ -13,8 +13,9 @@ TEST_SRC	=	$(realpath ./tests)
 
 SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/map.c	\
-	$(SRC_DIR)/communication.c	\
+	$(SRC_DIR)/signal.c	\
 	$(SRC_DIR)/transmission.c	\
+	$(SRC_DIR)/communication.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 
