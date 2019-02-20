@@ -6,7 +6,6 @@ services:
 notifications:
   email:
     recipients:
-      - tomasforne1@gmail.com
       - tomas.forne-cappeau@epitech.eu
       - paul.tardivel@epitech.eu
     on_success: never

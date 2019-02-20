@@ -27,12 +27,16 @@ int error_handle(int argc, char * const * argv)
 
 int main(int argc, char * const * argv)
 {
+    int ret = 0;
+
     if (error_handle(argc, argv))
         return (84);
     if (!my_strcmp(argv[1], "-h")) {
         print_usage();
         return (0);
     }
-    navy(argc, argv);
+    ret = navy(argc, argv);
+    if (ret == 1)
+        return (1);
     return (0);
 }
