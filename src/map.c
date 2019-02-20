@@ -5,8 +5,8 @@
 ** Draw the map
 */
 
-#include "include/my.h"
-#include "include/map.h"
+#include "my.h"
+#include "map.h"
 
 int recover_ship_position(char *filepath)
 {

@@ -16,6 +16,7 @@ SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/gestion_player_one.c \
 	$(SRC_DIR)/gestion_player_two.c \
 	$(SRC_DIR)/map_tool.c
+	$(SRC_DIR)/game.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 
@@ -61,13 +62,13 @@ debug:	$(OBJ)
 	gcc -o $(NAME) $(MAIN_SRC) $(OBJ) $(INCLUDE) $(LIB) -DDEBUG -g3
 
 tests_run:	re
-	gcc -c $(SRC) --coverage
+	gcc -c $(SRC) $(INCLUDE) --coverage
 	gcc -c $(TESTS) $(INCLUDE)
-	gcc -o unit_tests *.o -lcriterion -lgcov -g3
+	gcc -o unit_tests *.o -lcriterion -lgcov -g3 $(LIB)
 	./unit_tests --always-succeed
 	gcovr
 
 %.o:	%.c
-	@$(CC) -o $@ -c $< -W
+	@$(CC) -o $@ -c $< -W $(INCLUDE)
 
 .PHONY:	all clean fclean re tests_run bonus debug

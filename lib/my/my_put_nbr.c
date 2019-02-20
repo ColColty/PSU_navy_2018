@@ -1,42 +1,45 @@
 /*
 ** EPITECH PROJECT, 2018
-** MY PUT NBR
+** my_put_nbr.c
 ** File description:
-** NO IDEA
+** put number
 */
 
 #include "../../include/my.h"
 
-int test_null(int nl)
+int negatif(int chiffre)
 {
-    if (nl == 0) {
-        my_putchar(48);
-    } else if (nl < 0) {
+    if (chiffre < 0) {
         my_putchar('-');
+        return (1);
     }
-    return (nl);
+    else
+        return (0);
 }
 
-int my_put_nbr(int n)
+int my_put_chiffre(long int chiffre)
 {
-    int div = 1000000000;
-    int number;
-    int the_eliminator = 0;
-    long int n2 = n;
+    if (chiffre >= 10) {
+        my_put_nbr(chiffre/10);
+    }
+    chiffre = chiffre % 10 + 48;
+    my_putchar(chiffre);
+    return (0);
+}
 
-    n2 = test_null(n2);
-    if (n2 < 0) {
-        n2 *= -1;
+int my_put_nbr(int nb)
+{
+    long int chiffre;
+    int test;
+
+    chiffre = nb;
+    test = negatif(chiffre);
+    if (test == 1)
+        chiffre = -chiffre;
+    if (chiffre >= 10) {
+        my_put_chiffre(chiffre/10);
     }
-    while (div != 0) {
-        number = (n2 / div) % 10;
-        if (the_eliminator == 0 && number == 0) {
-            the_eliminator = 0;
-        } else {
-            my_putchar(number + 48);
-            the_eliminator = 1;
-            }
-        div /= 10;
-    }
+    chiffre = chiffre % 10 + 48;
+    my_putchar(chiffre);
     return (0);
 }
