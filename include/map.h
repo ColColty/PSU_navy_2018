@@ -24,7 +24,6 @@ typedef struct info_s {
 } info_t;
 
 int recover_ship_position(char *filepath);
-int navy(char * const *argv);
 char **create_the_map(info_t *info);
 char **print_the_map(char **map, int player);
 int gestion_first_player(info_t *player_one, char *buffer);
