@@ -6,28 +6,7 @@
 */
 
 #include "my.h"
-#include <stddef.h>
-#include <signal.h>
-#include <stdlib.h>
-
-transmissions_t array[16][8] = {
-    {'A', "01000001"},
-    {'B', "01000010"},
-    {'C', "01000011"},
-    {'D', "01000100"},
-    {'E', "01000101"},
-    {'F', "01000110"},
-    {'G', "01000111"},
-    {'H', "01001000"},
-    {'1', "00110001"},
-    {'2', "00110010"},
-    {'3', "00110011"},
-    {'4', "00110100"},
-    {'5', "00110101"},
-    {'6', "00110110"},
-    {'7', "00110111"},
-    {'8', "00111000"}
-};
+#include "transmission.h"
 
 void send_signal(connection_t *com, transmissions_t *game)
 {
@@ -38,24 +17,6 @@ void send_signal(connection_t *com, transmissions_t *game)
     my_send_nbr_base(game->user_input[1], "01", com);
     #ifdef TESTS
         printf("$$ Signal for number %c was sended !\n", game->user_input[1]);
-    #endif
-}
-
-void binary_interpreter(char *number)
-{
-    char letter;
-
-    printf("%s\n", array[1]->binary_correspond);
-    for (int i = 0; i < 16; i++) {
-        if (!my_strcmp(number, array[i]->binary_correspond)) {
-            #ifdef TESTS
-                printf("%s equal to %s and the character is %c\n", number, array[i]->binary_correspond, array[i]->character);
-            #endif
-            letter = array[i]->character;
-        }
-    }
-    #ifdef TESTS
-        printf("The letter is %c\n", letter);
     #endif
 }
 
