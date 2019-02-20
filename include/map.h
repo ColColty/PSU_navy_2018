@@ -25,5 +25,9 @@ typedef struct info_s {
 
 int recover_ship_position(char *filepath);
 int navy(char * const *argv);
+char **create_the_map(info_t *info);
+char **print_the_map(char **map, int player);
+int gestion_first_player(info_t *player_one, char *buffer);
+int gestion_second_player(info_t *player_two, char *buffer);
 
 #endif /* !MAP_H_ */
