@@ -15,8 +15,6 @@ extern connection_t communication = {0, -1};
 void get_attack_pid(int sig, siginfo_t *info, void *context)
 {
     communication.attack_pid = info->si_pid;
-    if (sig == 10)
-        communication.connected = 1;
     return (0);
 }
 
@@ -30,7 +28,7 @@ void connect_to_player(void)
     #ifdef TESTS
         printf("$$ Waiting for signal\n");
     #endif
-    while (!communication.connected);
+    pause();
 }
 
 int connect_player1(connection_t *com)
@@ -46,7 +44,7 @@ int connect_player1(connection_t *com)
     if (kill(communication.attack_pid, SIGUSR1) == -1)
         return (1);
     my_putstr("enemy connected\n");
-    com = &communication;
+    com->attack_pid = communication.attack_pid;
     return (0);
 }
 
@@ -63,7 +61,10 @@ int connect_player2(char * const * argv, connection_t *com)
     if (kill(com->attack_pid, SIGUSR1) == -1)
         return (1);
     connect_to_player();
+    #ifdef TESTS
+        printf("$$ Signal recieved !\n");
+    #endif
     my_putstr("successfully connected\n");
-    com = &communication;
+    com->attack_pid = communication.attack_pid;
     return (0);
 }
