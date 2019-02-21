@@ -16,6 +16,9 @@ SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/signal.c	\
 	$(SRC_DIR)/transmission.c	\
 	$(SRC_DIR)/communication.c	\
+	$(SRC_DIR)/gestion_player_one.c \
+  $(SRC_DIR)/gestion_player_two.c \
+	$(SRC_DIR)/map_tool.c
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 	$(TEST_SRC)/transmission_tests.c	\
