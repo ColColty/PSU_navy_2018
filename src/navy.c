@@ -12,6 +12,7 @@ int verif_win(void)
 {
     printf("BONJOUR");
 }
+
 int navy(int argc, char * const *argv)
 {
     connection_t com;
