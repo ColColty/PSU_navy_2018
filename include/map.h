@@ -24,17 +24,15 @@ typedef struct info_s {
     char **map;
 } info_t;
 
-typedef struct position_s {
-    char **tab_position_one;
-    char **tab_position_two;
-    info_t info_position;
-} position_t;
+typedef struct player_s {
+    info_t player_one;
+    info_t player_two;
+} player_t;
 
-int recover_ship_position(char *filepath);
+int recover_ship_position(char *filepath, info_t *player);
 char **create_the_map(info_t *info);
 char **print_the_map(char **map, int player);
 int gestion_first_player(info_t *player_one, char *buffer);
-int gestion_second_player(info_t *player_two, char *buffer);
-int main_save_position(position_t *position, int player, char *pos);
+char **create_map_defender(char **map);
 
 #endif

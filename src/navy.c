@@ -20,6 +20,7 @@ int navy(int argc, char * const *argv)
     size_t n = 0;
     transmissions_t trans;
     unsigned int usecs = 200000;
+    player_t player;
 
     if (argc == 2) {
         if (connect_player1(&com, &trans))
@@ -27,19 +28,15 @@ int navy(int argc, char * const *argv)
         trans.user_input = "F1";
         usleep(usecs);
         send_signal(&com, &trans);
-        recover_ship_position(argv[1]);
+        recover_ship_position(argv[1], &player.player_one);
     } else if (argc == 3) {
         com.attack_pid = my_atoi(argv[1]);
         if (connect_player2(&com, &trans))
             return (1);
         recieve_signal();
-        recover_ship_position(argv[2]);
+        recover_ship_position(argv[2], &player.player_two);
     }
     my_putstr(trans.attacant_input);
     my_putchar('\n');
-    while (1) {
-        if (getline(&buffer, &n, stdin) == -1)
-            exit (0);
-        }
     return (0);
 }
