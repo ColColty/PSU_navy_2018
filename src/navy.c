@@ -8,6 +8,10 @@
 #include "my.h"
 #include "map.h"
 
+int verif_win(void)
+{
+    printf("BONJOUR");
+}
 int navy(int argc, char * const *argv)
 {
     connection_t com;
@@ -22,5 +26,10 @@ int navy(int argc, char * const *argv)
         player2(argv, &com);
         recover_ship_position(argv[2]);
     }
+    while (1) {
+            if (getline(buffer, 0, stdin) == -1)
+                exit (0);
+            verif_win();
+        }
     return (0);
 }
