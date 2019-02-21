@@ -37,7 +37,6 @@ int connect_player1(connection_t *com, transmissions_t *trans)
 int connect_player2(char * const *argv, connection_t *com,
 transmissions_t *trans)
 {
-    com->attack_pid = my_atoi(argv[1]);
     com->pid = getpid();
     my_putstr("my_pid: ");
     my_put_nbr(com->pid);

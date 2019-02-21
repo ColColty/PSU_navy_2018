@@ -8,7 +8,7 @@
 #include "transmission.h"
 #include "my.h"
 
-volatile signal_t global_sig = {0, 0};
+volatile signal_t global_sig = {0, "00"};
 
 transmissions_t array[16][8] = {
     {'A', "01000001", NULL, NULL},
@@ -42,12 +42,37 @@ void binary_interpreter(char *number)
         if (!my_strcmp(number, array[i]->binary_correspond)) {
             global_sig.attacant_move[k++] = array[i]->character;
         }
-    if (k > 1)
+    if (k > 1) {
+        global_sig.attacant_move[2] = '\0';
         k = 0;
+    }
 }
 
 void recupering_global(connection_t *connect, transmissions_t *trans)
 {
     connect->attack_pid = (int) global_sig.pid_attacant;
     trans->attacant_input = (char *) global_sig.attacant_move;
+}
+
+static int signal_send_character(connection_t *com, int i)
+{
+    for (int k = 0; k < 8; k++) {
+        if (array[i]->binary_correspond[k] == '0') {
+            if (kill(com->attack_pid, SIGUSR1) == -1)
+                return (-1);
+        } else if (array[i]->binary_correspond[k] == '1')
+            if (kill(com->attack_pid, SIGUSR2) == -1)
+                return (-1);
+        usleep(1000); 
+    }
+    return (0);
+}
+
+int signal_character_finder(connection_t *com, char character)
+{
+    for (int i = 0; i < 16; i++)
+        if (character == array[i]->character)
+            if (signal_send_character(com, i) == -1)
+                return (-1);
+    return (0); 
 }
