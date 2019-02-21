@@ -18,7 +18,7 @@ void nothing_to_do(int sig, siginfo_t *info, void *context)
 
 Test(transmission_tests, transmit_letter_a)
 {
-    int sigs[8] = {12, 10, 10, 10, 10, 10, 12, 10};
+    int sigs[8] = {10, 12, 10, 10, 10, 10, 10, 12};
     char *ret;
 
     for (int i = 0; i < 8; i++)
@@ -38,7 +38,22 @@ Test(transmission_tests, sending_a_signal_without_success)
 
 Test(transmission_tests, recieving_signals)
 {
-    recieve_signal();
+    connection_t com = {1, 0, 9970};
+    transmissions_t trans = {0, "01000001", "F1", "G3"};
+    char *ret = NULL;
+    int pid = 0;
+    int subpid = 0;
+
+    com.pid = getpid();
+    subpid = fork();
+    if (subpid == 0) {
+        com.attack_pid = com.pid;
+        usleep(1000);
+        send_signal(&com, &trans);
+    } else {
+        ret = recieve_signal(&com, &trans);
+    }
+    cr_assert_str_eq(ret, "F1");
 }
 
 Test(transmission_tests, sending_letter_and_number)
@@ -62,6 +77,25 @@ Test(transmission_tests, sending_letter_and_number)
     } else {
         com.attack_pid = subpid;
         ret = send_signal(&com, &trans);
+    }
+    cr_assert_eq(ret, 0);
+}
+
+Test(transmission_tests, connect_player1)
+{
+    connection_t com = {1, 0, 9970};
+    transmissions_t trans = {0, "01000001", "00", "00"};
+    int p1_pid = 0;
+    int p2_pid = 0;
+    int ret = -1;
+
+    p1_pid = fork();
+    if (!p1_pid) {
+        usleep(1000);
+        kill(p1_pid, SIGUSR1);
+        pause();
+    } else {
+        ret = connect_player1(&com, &trans);
     }
     cr_assert_eq(ret, 0);
 }

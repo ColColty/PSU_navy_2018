@@ -8,10 +8,10 @@
 #include "my.h"
 #include "transmission.h"
 
-int send_signal(connection_t *com, transmissions_t *game)
+int send_signal(connection_t *com, transmissions_t *trans)
 {
-    if (my_send_nbr_base(game->user_input[0], "01", com) == -1
-    || my_send_nbr_base(game->user_input[1], "01", com) == -1)
+    if (signal_character_finder(com, trans->user_input[0]) == -1
+    || signal_character_finder(com, trans->user_input[1]) == -1)
         return (-1);
     return (0);
 }
@@ -28,14 +28,13 @@ char *signal_decoder(int sig, siginfo_t *info, void *context)
         number[i++] = '1';
     if (i > 7) {
         number[i] = '\0';
-        my_revstr(number);
         i = 0;
         binary_interpreter(number);
     }
     return (number);
 }
 
-void recieve_signal(void)
+char *recieve_signal(connection_t *com, transmissions_t *trans)
 {
     struct sigaction sa;
     int sig[2] = {10, 12};
@@ -45,9 +44,8 @@ void recieve_signal(void)
     for (int i = 0; i < 16; i++) {
         for (int k = 0; k < 2; k++)
             sigaction(sig[k], &sa, NULL);
-        #ifdef UNIT_TESTS
-        #else
-            pause();
-        #endif
+        pause();
     }
+    recupering_global(com, trans);
+    return (trans->attacant_input);
 }
