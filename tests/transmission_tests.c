@@ -18,7 +18,7 @@ void nothing_to_do(int sig, siginfo_t *info, void *context)
 
 Test(transmission_tests, transmit_letter_a)
 {
-    int sigs[8] = {12, 10, 10, 10, 10, 10, 12, 10};
+    int sigs[8] = {10, 12, 10, 10, 10, 10, 10, 12};
     char *ret;
 
     for (int i = 0; i < 8; i++)
@@ -38,7 +38,10 @@ Test(transmission_tests, sending_a_signal_without_success)
 
 Test(transmission_tests, recieving_signals)
 {
-    recieve_signal();
+    connection_t com = {1, 0, 9970};
+    transmissions_t trans = {0, "01000001", "F1", "G3"};
+
+    recieve_signal(&com, &trans);
 }
 
 Test(transmission_tests, sending_letter_and_number)
