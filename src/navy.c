@@ -21,10 +21,13 @@ int navy(int argc, char * const *argv)
         usleep(usecs);
         send_signal(&com, &trans);
     } else if (argc == 3) {
-        if (connect_player2(argv, &com, &trans))
+        com.attack_pid = my_atoi(argv[1]);
+        if (connect_player2(&com, &trans))
             return (1);
-        recieve_signal(&com, &trans);
+        recieve_signal();
     }
+    my_putstr(trans.attacant_input);
+    my_putchar('\n');
     recover_ship_position(argv[1]);
     return (0);
 }

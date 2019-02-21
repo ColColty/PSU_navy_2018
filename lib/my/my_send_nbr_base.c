@@ -9,13 +9,15 @@
 #include <signal.h>
 #include <stddef.h>
 
-void completing(int i, connection_t *com)
+static int completing(int i, connection_t *com)
 {
     if (i < 8)
         for (int k = i; k < 8; k++) {
-            kill(com->attack_pid, SIGUSR1);
+            if (kill(com->attack_pid, SIGUSR1) == -1)
+                return (-1);
             usleep(1000);
         }
+    return (0);
 }
 
 int my_send_nbr_base(int nb, char const *base, connection_t *com)
@@ -26,16 +28,18 @@ int my_send_nbr_base(int nb, char const *base, connection_t *com)
 
     if (base == NULL)
         return (0);
-    while (nb != 0) {
+    for (i; nb != 0; i++) {
         nb_base = nb % base_size;
-        if ((base[nb_base] % 2) == 0)
-            kill(com->attack_pid, SIGUSR1);
-        else if ((base[nb_base] % 2) == 1)
-            kill(com->attack_pid, SIGUSR2);
+        if (base[nb_base] == '0') {
+            if (kill(com->attack_pid, SIGUSR1) == -1)
+                return (-1);
+        } else if (base[nb_base] == '1')
+            if (kill(com->attack_pid, SIGUSR2) == -1)
+                return (-1);
         usleep(1000);
         nb /= base_size;
-        i++;
     }
-    completing(i, com);
+    if (completing(i, com) == -1)
+        return (-1);
     return (0);
 }
