@@ -32,7 +32,7 @@ int navy(int argc, char * const *argv)
         com.attack_pid = my_atoi(argv[1]);
         if (connect_player2(&com, &trans))
             return (1);
-        recieve_signal();
+        recieve_signal(&com, &trans);
         recover_ship_position(argv[2]);
     }
     my_putstr(trans.attacant_input);
