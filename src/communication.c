@@ -29,20 +29,19 @@ int connect_player1(connection_t *com, transmissions_t *trans)
     my_putstr("\nWaiting for enemy connection...\n\n");
     connect_to_player(com, trans);
     if (kill(com->attack_pid, SIGUSR1) == -1)
-        return (1);
+        return (-1);
     my_putstr("enemy connected\n");
     return (0);
 }
 
-int connect_player2(char * const *argv, connection_t *com,
-transmissions_t *trans)
+int connect_player2(connection_t *com, transmissions_t *trans)
 {
     com->pid = getpid();
     my_putstr("my_pid: ");
     my_put_nbr(com->pid);
     my_putchar('\n');
     if (kill(com->attack_pid, SIGUSR1) == -1)
-        return (1);
+        return (-1);
     connect_to_player(com, trans);
     my_putstr("successfully connected\n");
     return (0);

@@ -16,7 +16,7 @@ int send_signal(connection_t *com, transmissions_t *trans)
     return (0);
 }
 
-void signal_decoder(int sig, siginfo_t *info, void *context)
+char *signal_decoder(int sig, siginfo_t *info, void *context)
 {
     static char number[8];
     static int i = 0;
@@ -31,9 +31,10 @@ void signal_decoder(int sig, siginfo_t *info, void *context)
         i = 0;
         binary_interpreter(number);
     }
+    return (number);
 }
 
-void recieve_signal(connection_t *com, transmissions_t *trans)
+void recieve_signal(void)
 {
     struct sigaction sa;
     int sig[2] = {10, 12};
@@ -43,7 +44,10 @@ void recieve_signal(connection_t *com, transmissions_t *trans)
     for (int i = 0; i < 16; i++) {
         for (int k = 0; k < 2; k++)
             sigaction(sig[k], &sa, NULL);
-        pause();
+        #ifdef UNIT_TESTS
+        #else
+            pause();
+        #endif
     }
     recupering_global(com, trans);
 }
