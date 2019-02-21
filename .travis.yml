@@ -20,20 +20,10 @@ install:
 
 jobs:
   include:
-    - stage: Build
-      name: "Building"
-      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make"
-    - stage: Tests
-      name: "Basic Tests"
-      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./basic_tests.sh navy"
-    - script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make tests_run"
-      name: "Make the tests"
     - stage: Deployment
       name: "Push to blih repo"
       script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./deploy.sh"
 
 stages:
-  - Build
-  - Tests
   - name: Deployment
     if: branch = deployment
