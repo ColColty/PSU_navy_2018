@@ -21,7 +21,6 @@ int change_line(char *position, int i)
 
 char **add_position2(char **map, info_t *info)
 {
-    
     int i = info->start_y - 1;
     int k = info->start_x * 2;
 
