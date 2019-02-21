@@ -1,0 +1,29 @@
+language: c
+
+services:
+  - docker
+
+notifications:
+  email:
+    recipients:
+      - tomas.forne-cappeau@epitech.eu
+      - paul.tardivel@epitech.eu
+    on_success: never
+    on_failure: always
+
+env:
+  global:
+    - DOCKER_REPO=epitechcontent/epitest-docker
+
+install:
+  - docker pull ${DOCKER_REPO}
+
+jobs:
+  include:
+    - stage: Deployment
+      name: "Push to blih repo"
+      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./deploy.sh"
+
+stages:
+  - name: Deployment
+    if: branch = deployment
