@@ -24,7 +24,7 @@ int navy(int argc, char * const *argv)
     if (argc == 2) {
         if (connect_player1(&com, &trans))
             return (1);
-        trans.user_input = "F1";
+        trans.user_input = "C3";
         usleep(usecs);
         send_signal(&com, &trans);
         recover_ship_position(argv[1]);

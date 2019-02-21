@@ -12,7 +12,6 @@ SRC	=	my_putchar.c	\
 	my_put_nbr.c \
 	my_show_word_array.c \
 	my_atoi.c	\
-	my_send_nbr_base.c	\
 	my_revstr.c	\
 	my_str_to_word_array.c  \
 
