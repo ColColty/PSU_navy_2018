@@ -18,21 +18,28 @@ int navy(int argc, char * const *argv)
     connection_t com;
     char *buffer = NULL;
     size_t n = 0;
-    info_t player_one;
-    info_t player_two;
+    transmissions_t trans;
+    unsigned int usecs = 200000;
 
     if (argc == 2) {
-        player1(argv, &com);
-        recover_ship_position(argv[1], player_one);
+        if (connect_player1(&com, &trans))
+            return (1);
+        trans.user_input = "F1";
+        usleep(usecs);
+        send_signal(&com, &trans);
+        recover_ship_position(argv[1]);
+    } else if (argc == 3) {
+        com.attack_pid = my_atoi(argv[1]);
+        if (connect_player2(&com, &trans))
+            return (1);
+        recieve_signal();
+        recover_ship_position(argv[2]);
     }
-    else if (argc == 3) {
-        player2(argv, &com);
-        recover_ship_position(argv[2], player_two);
-    }
+    my_putstr(trans.attacant_input);
+    my_putchar('\n');
     while (1) {
         if (getline(&buffer, &n, stdin) == -1)
             exit (0);
-        
         }
     return (0);
 }
