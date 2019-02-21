@@ -34,7 +34,7 @@ char *signal_decoder(int sig, siginfo_t *info, void *context)
     return (number);
 }
 
-void recieve_signal(void)
+void recieve_signal(connection_t *com, transmissions_t *trans)
 {
     struct sigaction sa;
     int sig[2] = {10, 12};
