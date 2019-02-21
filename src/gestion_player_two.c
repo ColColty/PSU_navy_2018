@@ -5,8 +5,8 @@
 ** function for the gestion of the second player
 */
 
-#include "include/my.h"
-#include "include/map.h"
+#include "my.h"
+#include "map.h"
 
 int gestion_second_player(info_t *player_two, char *buffer)
 {

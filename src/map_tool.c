@@ -5,8 +5,8 @@
 ** Tool for create the map
 */
 
-#include "include/my.h"
-#include "include/map.h"
+#include "my.h"
+#include "map.h"
 
 char **print_the_map(char **map, int player)
 {

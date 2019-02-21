@@ -12,7 +12,6 @@ int recover_ship_position(char *filepath)
 {
     info_t player_one;
     info_t player_two;
-    position_t position;
     char *buffer = NULL;
     int fd = open(filepath, O_RDONLY);
 
@@ -24,5 +23,6 @@ int recover_ship_position(char *filepath)
     close(fd);
     gestion_first_player(&player_one, buffer);
     gestion_second_player(&player_two, buffer); 
+    free(buffer);
     return (0);
 }

@@ -5,8 +5,8 @@
 ** player one gestion
 */
 
-#include "include/my.h"
-#include "include/map.h"
+#include "my.h"
+#include "map.h"
 
 int change_line(char *position, int i)
 {
