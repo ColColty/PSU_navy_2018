@@ -23,16 +23,7 @@ echo "Git configuration added..."
 echo "Adding the remote..."
 git remote add blih git@git.epitech.eu:/paul.tardivel@epitech.eu/PSU_navy_2018
 
-git remote
-
-echo `git branch`
-
-git add --all
-git commit -m "[UPDATE] Pushing the master branch from github to update the Epitech repo"
-git push origin master
-
-echo `git branch`
-
+git fetch --all
 
 echo "Push master to blih/master..."
 git push blih origin/master:refs/heads/master
