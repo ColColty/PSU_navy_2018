@@ -22,7 +22,7 @@ jobs:
   include:
     - stage: Deployment
       name: "Push to blih repo"
-      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./deploy.sh"
+      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app/deploy && ./deploy.sh"
 
 stages:
   - name: Deployment

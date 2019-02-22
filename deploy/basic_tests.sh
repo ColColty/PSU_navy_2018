@@ -12,9 +12,9 @@ test_arguments()
     RET=`echo $?`
 
     if [ $RET -eq 124 ]; then
-        echo "This is a timeout of 2secs"
+        echo "This is a timeout of 2secs for test $COUNTER"
     elif [ $RET -ne 84 ] && [ $RET -ne 0 ]; then
-        echo "Failed with code: $RET"
+        echo "Test $COUNTER failed with code: $RET"
         exit $RET
     else
         COUNTER=$((COUNTER + 1))
