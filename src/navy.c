@@ -16,7 +16,6 @@ int verif_win(void)
 int navy(int argc, char * const *argv)
 {
     connection_t com;
-    char *buffer = NULL;
     size_t n = 0;
     transmissions_t trans;
     unsigned int usecs = 200000;
