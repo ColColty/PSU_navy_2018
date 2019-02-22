@@ -7,7 +7,6 @@ notifications:
   email:
     recipients:
       - tomas.forne-cappeau@epitech.eu
-      - paul.tardivel@epitech.eu
     on_success: never
     on_failure: always
 
