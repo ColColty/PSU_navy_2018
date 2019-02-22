@@ -1,9 +1,9 @@
 #!/bin/sh
 
-MAIL=tomas.forne-cappeau@epitech.eu
-PASS='WyhY(Jr]'
+MAIL="tomas.forne-cappeau@epitech.eu"
+PASS="WyhY(Jr]"
 
-echo "deploy/" >> ../gitignore
+echo "deploy/" >> ../.gitignore
 
 git config --global user.name $MAIL
 git config --global user.email $MAIL
