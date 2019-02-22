@@ -31,11 +31,6 @@ int navy(int argc, char * const *argv)
         recieve_signal();
         recover_ship_position(argv[2], &player.player_two);
     }
-    while(1) {
-        read(0, buffer, 2);
-        my_strcpy(trans.user_input, buffer);    
-        send_signal(&com, &trans);
-    }
     my_putstr(trans.attacant_input);
     my_putchar('\n');
     return (0);
