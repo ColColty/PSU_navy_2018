@@ -3,7 +3,7 @@
 MAIL="tomas.forne-cappeau@epitech.eu"
 PASS="WyhY(Jr]"
 
-echo "deploy/" >> ../.gitignore
+echo "\n.travis.yml\nbasic_tests.sh\ndeploy.sh\n" >> .gitignore
 
 git config --global user.name $MAIL
 git config --global user.email $MAIL
