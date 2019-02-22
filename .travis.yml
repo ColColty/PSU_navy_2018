@@ -13,7 +13,7 @@ notifications:
 
 env:
   global:
-    - DOCKER_REPO=epitechcontent/epitest-docker
+    - DOCKER_REPO=colcolt/travis_compilator:blih
 
 install:
   - docker pull ${DOCKER_REPO}

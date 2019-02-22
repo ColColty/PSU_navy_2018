@@ -12,7 +12,7 @@ echo "*.py" >> .gitignore
 ssh-keygen -q -t rsa -N '' -C uploadSystem -f /root/.ssh/id_rsa
 
 echo "Uploading sshkey to blih"
-python3 tmp/blih.py -u $MAIL sshkey upload /root/.ssh/id_rsa.pub
+python3 /tmp/blih.py -u $MAIL sshkey upload /root/.ssh/id_rsa.pub
 
 git config --global user.name $MAIL
 git config --global user.email $MAIL
@@ -29,4 +29,4 @@ echo "Push master to blih/master..."
 git push blih origin/master:refs/heads/master
 
 echo "Deleting sshkey from blih"
-python3 tmp/blih.py -u $MAIL sshkey delete uploadSystem
+python3 /tmp/blih.py -u $MAIL sshkey delete uploadSystem
