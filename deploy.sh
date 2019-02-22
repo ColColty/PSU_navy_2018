@@ -31,6 +31,9 @@ git add --all
 git commit -m "[UPDATE] Pushing the master branch from github to update the Epitech repo"
 git push origin master
 
+echo `git branch`
+
+
 echo "Push master to blih/master..."
 git push blih origin/master:refs/heads/master
 
