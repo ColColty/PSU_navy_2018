@@ -8,11 +8,6 @@
 #include "my.h"
 #include "map.h"
 
-int verif_win(void)
-{
-    
-}
-
 int navy(int argc, char * const *argv)
 {
     connection_t com;
@@ -20,6 +15,7 @@ int navy(int argc, char * const *argv)
     transmissions_t trans;
     unsigned int usecs = 200000;
     player_t player;
+    char *buffer = NULL;
 
     if (argc == 2) {
         if (connect_player1(&com, &trans))
@@ -34,6 +30,11 @@ int navy(int argc, char * const *argv)
             return (1);
         recieve_signal();
         recover_ship_position(argv[2], &player.player_two);
+    }
+    while(1) {
+        read(0, buffer, 2);
+        my_strcpy(trans.user_input, buffer);    
+        send_signal(&com, &trans);
     }
     my_putstr(trans.attacant_input);
     my_putchar('\n');
