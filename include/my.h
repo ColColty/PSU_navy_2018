@@ -34,6 +34,7 @@ int my_put_nbr(int nb);
 int my_send_nbr_base(int nb, char const *base, connection_t *com);
 int my_atoi(char *src);
 int my_revstr(char *src);
+char *my_strcpy(char *dest, char *src);
 
 int navy(int argc, char * const *argv);
 int connect_player1(connection_t *com, transmissions_t *trans);
