@@ -20,6 +20,7 @@ SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/gestion_player_two.c	\
 	$(SRC_DIR)/map_tool.c	\
 	$(SRC_DIR)/game_loop.c	\
+	$(SRC_DIR)/hit_missed.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 	$(TEST_SRC)/transmission_tests.c	\
@@ -73,7 +74,7 @@ tests_run:	re
 	gcc -c $(SRC) $(INCLUDE) -DUNIT_TESTS --coverage
 	gcc -c $(TESTS) $(INCLUDE)
 	gcc -o unit_tests *.o -lcriterion -lgcov $(LIB)
-	./unit_tests --always-succeed
+	timeout 10 ./unit_tests --always-succeed
 	gcovr
 
 %.o:	%.c

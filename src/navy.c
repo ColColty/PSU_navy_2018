@@ -26,13 +26,13 @@ int navy(int argc, char * const *argv)
         if (connect_player1(&com, &trans))
             return (1);
         recover_ship_position(argv[1]);
-        p1_game_loop(&trans, &com);
+        game_loop(&trans, &com, 1);
     } else if (argc == 3) {
         com.attack_pid = my_atoi(argv[1]);
         if (connect_player2(&com, &trans))
             return (1);
         recover_ship_position(argv[2]);
-        p2_game_loop(&trans, &com);
+        game_loop(&trans, &com, 2);
     }
     my_putstr(trans.attacant_input);
     my_putchar('\n');

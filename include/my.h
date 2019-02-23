@@ -41,7 +41,10 @@ int send_signal(connection_t *com, transmissions_t *game);
 void binary_interpreter(char *number);
 void recupering_global(connection_t *connect, transmissions_t *trans);
 int signal_character_finder(connection_t *com, char character);
-int p1_game_loop(connection_t *com, transmissions_t *trans);
-int p2_game_loop(connection_t *com, transmissions_t *trans);
+int game_loop(connection_t *com, transmissions_t *trans, int player);
+int recup_entry(transmissions_t *trans);
+void send_attack(transmissions_t *trans, connection_t *com);
+void send_hit_missed(transmissions_t *trans, connection_t *com);
+void recieve_hit_missed(transmissions_t *trans);
 
 #endif
