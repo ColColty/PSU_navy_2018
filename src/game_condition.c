@@ -16,8 +16,7 @@ void touch_or_not(char *coor, info_t *player)
         }
     }
     my_putstr("You don't touch");
-    return (-1)
-    
+    return (-1);
 }
 
 void game_condition(info_t *player)
