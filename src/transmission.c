@@ -39,6 +39,7 @@ char *recieve_signal(connection_t *com, transmissions_t *trans)
     struct sigaction sa;
     int sig[2] = {10, 12};
 
+    my_putstr("\nwaiting for enemy's attack...\n");
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = signal_decoder;
     for (int i = 0; i < 16; i++) {
