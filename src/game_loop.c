@@ -25,17 +25,17 @@ int recup_entry(transmissions_t *trans)
 int game_loop(connection_t *com, transmissions_t *trans, int player)
 {
     if (player == 1) {
-        send_attack(trans, com);
+        if (send_attack(trans, com) == -1)
+            return (-1);
         recieve_hit_missed(trans);
         recieve_signal(com, trans);
         send_hit_missed(trans, com);
-        return (game_loop(com, trans, player));
     } else if (player == 2) {
         recieve_signal(com, trans);
         send_hit_missed(trans, com);
-        send_attack(trans, com);
+        if (send_attack(trans, com) == -1)
+            return (-1);
         recieve_hit_missed(trans);
-        return (game_loop(com, trans, player));
     }
-    return (0);
+    return (game_loop(com, trans, player));
 }

@@ -38,7 +38,7 @@ void send_hit_missed(transmissions_t *trans, connection_t *com)
     kill(com->attack_pid, SIGUSR2); // Remplacer par la detection de colision
 }
 
-void send_attack(transmissions_t *trans, connection_t *com)
+int send_attack(transmissions_t *trans, connection_t *com)
 {
     my_putstr("\nattack: ");
     if (recup_entry(trans) == -1)
@@ -47,4 +47,5 @@ void send_attack(transmissions_t *trans, connection_t *com)
     if (send_signal(com, trans) == -1) {
         return (-1);
     }
+    return (0);
 }

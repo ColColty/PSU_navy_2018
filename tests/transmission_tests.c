@@ -28,7 +28,7 @@ Test(transmission_tests, transmit_letter_a)
 
 Test(transmission_tests, sending_a_signal_without_success)
 {
-    connection_t com = {1, 0, 9970};
+    connection_t com = {0, 9970};
     transmissions_t trans = {0, "01000001", "F1", "G3"};
     int ret = 0;
 
@@ -38,7 +38,7 @@ Test(transmission_tests, sending_a_signal_without_success)
 
 Test(transmission_tests, recieving_signals)
 {
-    connection_t com = {1, 0, 9970};
+    connection_t com = {0, 9970};
     transmissions_t trans = {0, "01000001", "F1", "G3"};
     char *ret = NULL;
     int pid = 0;
