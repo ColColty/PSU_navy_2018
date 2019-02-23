@@ -39,9 +39,8 @@ void binary_interpreter(char *number)
     static int k = 0;
 
     for (int i = 0; i < 16; i++)
-        if (!my_strcmp(number, array[i]->binary_correspond)) {
+        if (!my_strcmp(number, array[i]->binary_correspond))
             global_sig.attacant_move[k++] = array[i]->character;
-        }
     if (k > 1) {
         global_sig.attacant_move[2] = '\0';
         k = 0;
@@ -63,7 +62,7 @@ static int signal_send_character(connection_t *com, int i)
         } else if (array[i]->binary_correspond[k] == '1')
             if (kill(com->attack_pid, SIGUSR2) == -1)
                 return (-1);
-        usleep(1000); 
+        usleep(1000);
     }
     return (0);
 }
@@ -74,5 +73,5 @@ int signal_character_finder(connection_t *com, char character)
         if (character == array[i]->character)
             if (signal_send_character(com, i) == -1)
                 return (-1);
-    return (0); 
+    return (0);
 }
