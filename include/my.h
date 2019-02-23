@@ -45,6 +45,6 @@ int game_loop(connection_t *com, transmissions_t *trans, int player);
 int recup_entry(transmissions_t *trans);
 int send_attack(transmissions_t *trans, connection_t *com);
 void send_hit_missed(transmissions_t *trans, connection_t *com);
-void recieve_hit_missed(transmissions_t *trans);
+int recieve_hit_missed(transmissions_t *trans);
 
 #endif

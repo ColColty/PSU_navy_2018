@@ -27,7 +27,8 @@ int game_loop(connection_t *com, transmissions_t *trans, int player)
     if (player == 1) {
         if (send_attack(trans, com) == -1)
             return (-1);
-        recieve_hit_missed(trans);
+        if (recieve_hit_missed(trans) == -1)
+            return (-1);
         recieve_signal(com, trans);
         send_hit_missed(trans, com);
     } else if (player == 2) {
@@ -35,7 +36,8 @@ int game_loop(connection_t *com, transmissions_t *trans, int player)
         send_hit_missed(trans, com);
         if (send_attack(trans, com) == -1)
             return (-1);
-        recieve_hit_missed(trans);
+        if (recieve_hit_missed(trans) == -1)
+            return (-1);
     }
     return (game_loop(com, trans, player));
 }

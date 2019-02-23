@@ -16,7 +16,7 @@ static void hit_or_loose(int sig, siginfo_t *info, void *context)
         my_putstr(": missed\n");
 }
 
-void recieve_hit_missed(transmissions_t *trans)
+int recieve_hit_missed(transmissions_t *trans)
 {
     struct sigaction sa;
     int sig[2] = {10, 12};
@@ -26,8 +26,10 @@ void recieve_hit_missed(transmissions_t *trans)
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = hit_or_loose;
     for (int i = 0; i < 2; i++)
-        sigaction(sig[i], &sa, NULL);
+        if (sigaction(sig[i], &sa, NULL) == -1)
+            return (-1);
     pause();
+    return (0);
 }
 
 void send_hit_missed(transmissions_t *trans, connection_t *com)

@@ -48,8 +48,7 @@ $(NAME):	$(OBJ)
 clean:
 	@make clean -C $(LIB_FILE)
 	@rm -f *.gc*
-	@rm -f *.o
-	@rm -f $(SRC_DIR)/*.o
+	@find . -name "*.o" -type f -delete
 
 fclean:	clean
 	rm -f $(NAME)
