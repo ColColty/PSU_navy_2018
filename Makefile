@@ -73,7 +73,7 @@ tests_run:	re
 	gcc -c $(SRC) $(INCLUDE) -DUNIT_TESTS --coverage
 	gcc -c $(TESTS) $(INCLUDE)
 	gcc -o unit_tests *.o -lcriterion -lgcov $(LIB)
-	timeout 10 ./unit_tests --always-succeed
+	./basic_tests.sh unit_tests
 	gcovr
 
 %.o:	%.c
