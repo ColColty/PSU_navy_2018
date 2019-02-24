@@ -5,28 +5,32 @@
 ** WIning or losing condition
 */
 
-void touch_or_not(char *coor, info_t *player)
+#include "map.h"
+#include "my.h"
+#include "transmission.h"
+
+int touch_or_not(char *coor, info_t *player, connection_t *com)
 {
-    for (int i = 0; player->map[i] != NULL; i ++) {
-        for (int k = 0; player->map[i][k] != '\0'; k++) {
-            if (player->map[coor[0]][coor[1] * 2] >= 1 && player->map[coor[0]][coor[1] * 2] <= 9) {
-                printf("TOUCH!");
-                return (0);
-            }
-        }
+    if (player->map[TRANS(coor[1]) - 1][TRANS(coor[0]) * 2] >= '1'
+    && player->map[TRANS(coor[1]) - 1][TRANS(coor[0]) * 2] <= '9') {
+        my_putstr(": hit\n");
+        kill(com->attack_pid, SIGUSR2);
+        return (0);
     }
-    my_putstr("You don't touch");
-    return (-1);
+    my_putstr(": missed\n");
+    kill(com->attack_pid, SIGUSR1);
+    return (1);
 }
 
 void game_condition(info_t *player)
 {
     for (int i = 0; player->map[i] != NULL; i++) {
         for (int k = 0; player->map[i][k] != '\0'; k++) {
-            if (player->map[i][k] >= 1 && player->map[i][k] <= 9)
-                return (0);
+            if (player->map[i][k] >= '1' && player->map[i][k] <= '9')
+                return (1);
         }
     }
     my_putstr("I won");
-    // Send a signal to the enemy 
+    // Send a signal to the enemy
+    return (0);
 }

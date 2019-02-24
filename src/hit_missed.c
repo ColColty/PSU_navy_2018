@@ -7,6 +7,7 @@
 
 #include "my.h"
 #include "transmission.h"
+#include "map.h"
 
 static void hit_or_loose(int sig, siginfo_t *info, void *context)
 {
@@ -22,7 +23,6 @@ int recieve_hit_missed(transmissions_t *trans)
     int sig[2] = {10, 12};
 
     my_putstr(trans->user_input);
-    free(trans->user_input);
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = hit_or_loose;
     for (int i = 0; i < 2; i++)
@@ -32,12 +32,11 @@ int recieve_hit_missed(transmissions_t *trans)
     return (0);
 }
 
-void send_hit_missed(transmissions_t *trans, connection_t *com)
+void send_hit_missed(transmissions_t *trans, connection_t *com, info_t *player)
 {
     usleep(1000);
     my_putstr(trans->attacant_input);
-    my_putstr(": hit\n");
-    kill(com->attack_pid, SIGUSR2); // Remplacer par la detection de colision
+    touch_or_not(trans->attacant_input, player, com);
 }
 
 int send_attack(transmissions_t *trans, connection_t *com)
@@ -46,8 +45,7 @@ int send_attack(transmissions_t *trans, connection_t *com)
     if (recup_entry(trans) == -1)
         return (-1);
     recupering_global(com, trans);
-    if (send_signal(com, trans) == -1) {
+    if (send_signal(com, trans) == -1)
         return (-1);
-    }
     return (0);
 }

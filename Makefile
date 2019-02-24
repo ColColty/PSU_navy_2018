@@ -16,11 +16,12 @@ SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/signal.c	\
 	$(SRC_DIR)/transmission.c	\
 	$(SRC_DIR)/communication.c	\
-	$(SRC_DIR)/gestion_player_one.c	\
-	$(SRC_DIR)/gestion_player_two.c	\
+	$(SRC_DIR)/gestion_player_defender.c	\
 	$(SRC_DIR)/map_tool.c	\
 	$(SRC_DIR)/game_loop.c	\
+	$(SRC_DIR)/game_condition.c	\
 	$(SRC_DIR)/hit_missed.c	\
+	$(SRC_DIR)/free.c	\
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 	$(TEST_SRC)/transmission_tests.c	\

@@ -16,7 +16,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 
-typedef struct info_s {
+#define TRANS(value) ((value > 57) ? (value - 65) : (value - 48))
+
+typedef struct {
     int start_x;
     int start_y;
     int finish;
@@ -24,15 +26,15 @@ typedef struct info_s {
     char **map;
 } info_t;
 
-typedef struct player_s {
-    info_t player_one;
-    info_t player_two;
+typedef struct {
+    info_t player_defender;
+    info_t player_enemy;
 } player_t;
 
-int recover_ship_position(char *filepath, info_t *player);
-char **create_the_map(info_t *info);
-char **print_the_map(char **map, int player);
-int gestion_first_player(info_t *player_one, char *buffer);
-char **create_map_defender(char **map);
+int recover_ship_position(char *filepath, player_t *player);
+char *create_the_map(void);
+void print_hud(player_t *player);
+int gestion_first_player(info_t *player_defender, char *buffer);
+void create_map_defender(info_t *player);
 
 #endif
