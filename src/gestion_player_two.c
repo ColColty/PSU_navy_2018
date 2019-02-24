@@ -8,9 +8,24 @@
 #include "my.h"
 #include "map.h"
 
-int gestion_second_player(info_t *player_two, char *buffer)
+int **create_map(char **map)
 {
-    create_the_map(player_two);
+    map = malloc(sizeof(char *) * 128);
+
+    for (int i = 0; i != 8; i ++) {
+        map[i] = malloc(sizeof(char) * 16);
+        for (int k = 0; k != 16; k += 2) {
+            map[i][k] = '.';
+            map[i][k + 1] = ' ';
+        }
+    }
+    return (map);
+}
+
+char **create_map_defender(char **map)
+{
+    map = create_map(map);
     my_putchar('\n');
-    print_the_map(player_two->map, 2);
+    print_the_map(map, 2);
+    return (map);
 }
