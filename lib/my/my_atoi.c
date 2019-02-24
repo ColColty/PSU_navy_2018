@@ -12,7 +12,7 @@ int my_atoi(char *str)
     int number = 0;
 
     if (str == NULL)
-        return(0);
+        return (0);
     while (*str != '\0') {
         if (*str >= '0' && *str <= '9') {
             number *= 10;
