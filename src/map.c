@@ -13,8 +13,6 @@ int recover_ship_position(char *filepath, player_t *player)
     char *buffer = NULL;
     int fd = open(filepath, O_RDONLY);
 
-    if (fd == -1)
-        return (84);
     buffer = malloc(sizeof(char) * 32);
     read(fd, buffer, 32);
     close(fd);
