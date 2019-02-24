@@ -27,6 +27,6 @@ int navy(int argc, char * const *argv)
         recover_ship_position(argv[2], &player);
         game_loop_p2(&trans, &com, &player);
     }
-    free_everything(&player);
-    return (0);
+   free_everything(&player);
+   return (0);
 }
