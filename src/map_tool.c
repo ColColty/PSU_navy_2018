@@ -34,11 +34,12 @@ char *create_the_map(void)
     int k = 0;
 
     for (int i = 0; i != 8; i++) {
-        map[i] = malloc(sizeof(char) * 16);
+        map[i] = malloc(sizeof(char) * 17);
         for (k = 0; k < 16; k += 2) {
             map[i][k] = '.';
             map[i][k + 1] = ' ';
         }
+        map[i][k] = '\0';
     }
     return (map);
 }
