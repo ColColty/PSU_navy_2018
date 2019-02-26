@@ -22,6 +22,7 @@ SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/game_condition.c	\
 	$(SRC_DIR)/hit_missed.c	\
 	$(SRC_DIR)/free.c	\
+	$(SRC_DIR)/error_handle.c \
 
 TESTS	=	$(TEST_SRC)/basic_tests.c	\
 	$(TEST_SRC)/transmission_tests.c	\
