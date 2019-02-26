@@ -8,21 +8,21 @@
 #include "my.h"
 #include "map.h"
 
-int recover_ship_position(char *filepath)
+int recover_ship_position(char *filepath, player_t *player)
 {
-    info_t player_one;
-    info_t player_two;
     char *buffer = NULL;
     int fd = open(filepath, O_RDONLY);
+    int size = 0;
 
     if (fd == -1)
         return (84);
     buffer = malloc(sizeof(char) * 32);
-    read(fd, buffer, 32);
-    buffer[33] = '\0';
+    if ((size = read(fd, buffer, 32)) == 0)
+        return (-1);
     close(fd);
-    gestion_first_player(&player_one, buffer);
-    gestion_second_player(&player_two, buffer); 
+    gestion_first_player(&player->player_defender, buffer);
+    player->player_enemy.map = create_the_map();
+    print_hud(player);
     free(buffer);
     return (0);
 }

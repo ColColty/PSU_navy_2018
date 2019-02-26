@@ -13,7 +13,7 @@ int change_line(char *position, int i)
     while (position[i] != '\n') {
         if (position[i] == '\0')
             return (i);
-            i++;
+        i++;
     }
     i += 1;
     return (i);
@@ -43,11 +43,11 @@ char **add_position(char **map, info_t *info)
     return (map);
 }
 
-char **get_position(char *position, info_t *info)
+void get_position(char *position, info_t *info)
 {
     int i = 0;
-    
-    while (position[i] != '\0') {
+
+    while (i < 32) {
         info->nb_replace = position[i];
         i += 2;
         if (position[i] == position[i + 3]) {
@@ -57,7 +57,7 @@ char **get_position(char *position, info_t *info)
             add_position(info->map, info);
             i = change_line(position, i);
         }
-        else { 
+        else {
             info->start_x = position[i] - 65;
             info->start_y = position[i + 1] - 48;
             info->finish = position[i + 3] - 65;
@@ -67,10 +67,9 @@ char **get_position(char *position, info_t *info)
     }
 }
 
-int gestion_first_player(info_t *player_one, char *buffer)
+int gestion_first_player(info_t *player, char *buffer)
 {
-    create_the_map(player_one);
-    get_position(buffer, player_one);
-    print_the_map(player_one->map, 1);
+    player->map = create_the_map();
+    get_position(buffer, player);
     return (0);
 }

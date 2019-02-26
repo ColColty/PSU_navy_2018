@@ -8,36 +8,38 @@
 #include "my.h"
 #include "map.h"
 
-char **print_the_map(char **map, int player)
+static void print_the_map(char **map)
 {
-    int k = 1;
-
-    if (player == 1)
-        my_putstr("my positions: \n");
-    else
-        my_putstr("enemy's positions:\n");
     my_putstr(" |A B C D E F G H\n");
     my_putstr("-+---------------\n");
     for (int i = 0; i != 8; i++) {
-        my_put_nbr(k);
+        my_put_nbr(i + 1);
         my_putchar('|');
         my_putstr(map[i]);
         my_putchar('\n');
-        k++;
     }
 }
 
-char **create_the_map(info_t *info)
+void print_hud(player_t *player)
 {
-    info->map = malloc(sizeof(char *) * 128);
-    int i = 0;
+    my_putstr("\nmy positions: \n");
+    print_the_map(player->player_defender.map);
+    my_putstr("\nenemy's positions:\n");
+    print_the_map(player->player_enemy.map);
+}
+
+char *create_the_map(void)
+{
+    char **map = malloc(sizeof(char *) * 8);
     int k = 0;
 
-    for (i = 0; i != 8; i++) {
-        info->map[i] = malloc(sizeof(char) * 16);
-        for (k = 0; k != 16; k += 2) {
-            info->map[i][k] = '.';
-            info->map[i][k + 1] = ' ';
+    for (int i = 0; i != 8; i++) {
+        map[i] = malloc(sizeof(char) * 17);
+        for (k = 0; k < 16; k += 2) {
+            map[i][k] = '.';
+            map[i][k + 1] = ' ';
         }
+        map[i][k] = '\0';
     }
+    return (map);
 }

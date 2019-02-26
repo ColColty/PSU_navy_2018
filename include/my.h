@@ -11,9 +11,9 @@
 #include <stddef.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "map.h"
 
 typedef struct {
-    int connected;
     int pid;
     int attack_pid;
 } connection_t;
@@ -33,6 +33,7 @@ int my_show_word_array(char **tab);
 int my_put_nbr(int nb);
 int my_atoi(char *src);
 int my_revstr(char *src);
+char *my_strcpy(char *dest, char *src);
 
 int navy(int argc, char * const *argv);
 int connect_player1(connection_t *com, transmissions_t *trans);
@@ -42,4 +43,12 @@ int send_signal(connection_t *com, transmissions_t *game);
 void binary_interpreter(char *number);
 void recupering_global(connection_t *connect, transmissions_t *trans);
 int signal_character_finder(connection_t *com, char character);
+int game_loop_p2(connection_t *com, transmissions_t *trans, player_t *player);
+int game_loop_p1(connection_t *com, transmissions_t *trans,  player_t *player);
+int recup_entry(transmissions_t *trans);
+int send_attack(transmissions_t *trans, connection_t *com);
+void send_hit_missed(transmissions_t *trans, connection_t *com, info_t *player);
+int recieve_hit_missed(transmissions_t *trans);
+int touch_or_not(char *input, info_t *player, connection_t *com);
+
 #endif
