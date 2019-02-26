@@ -20,39 +20,17 @@ int print_usage(void)
     return (0);
 }
 
-int error_gestion(char *pathfile)
-{
-    int fd = open(pathfile, O_RDONLY);
-    char *buffer = NULL;
-    int i = 0;
-
-    if (fd == -1)
-        return (1);
-    buffer = malloc(sizeof(char) * 32);
-    read(fd, buffer, 32);
-    close(fd);
-    buffer[32] = '\0';
-    while (buffer[i] != '\0') {
-        if (buffer[i] >= 48 && buffer[i] <= 56
-        || buffer[i] == ':' || buffer[i] >= 65 && buffer[i] <= 72 
-        || buffer[i] == '\n')
-            i++;
-        else
-            return (1);
-    }
-    free(buffer);
-    return (0);
-}
-
 int error_handle(int argc, char * const * argv)
 {
     if (argc < 2)
         return (1);
     if (argc == 2) {
-        if(error_gestion(argv[1]) == 1)
+        if(main_error_gestion(argv[1]) == 1)
             return (1);
     }
     else if (argc == 3) {
+        if(main_error_gestion(argv[2]) == 1)
+            return (1);
     }
     return (0);
 }
