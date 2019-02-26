@@ -36,5 +36,6 @@ char *create_the_map(void);
 void print_hud(player_t *player);
 int gestion_first_player(info_t *player_defender, char *buffer);
 void create_map_defender(info_t *player);
+int main_error_gestion(char *pathfile);
 
 #endif
