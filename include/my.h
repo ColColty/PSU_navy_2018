@@ -38,7 +38,7 @@ char *my_strcpy(char *dest, char *src);
 int navy(int argc, char * const *argv);
 int connect_player1(connection_t *com, transmissions_t *trans);
 int connect_player2(connection_t *com, transmissions_t *trans);
-void recieve_signal(connection_t *com, transmissions_t *trans);
+char *recieve_signal(connection_t *com, transmissions_t *trans);
 int send_signal(connection_t *com, transmissions_t *game);
 void binary_interpreter(char *number);
 void recupering_global(connection_t *connect, transmissions_t *trans);
