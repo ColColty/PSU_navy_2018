@@ -31,6 +31,7 @@ jobs:
     - stage: Deployment
       name: "Push to blih repo"
       script:
+        - ssh-keyscan -H git.epitech.eu >> ~/.ssh/known_hosts
         - git remote add blih git@git.epitech.eu:/paul.tardivel@epitech.eu/PSU_navy_2018
         - git fetch blih
         - git push blih origin/master:refs/heads/master
