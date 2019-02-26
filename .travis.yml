@@ -30,10 +30,14 @@ jobs:
       name: "Make the tests"
     - stage: Deployment
       name: "Push to blih repo"
-      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./deploy.sh"
+      script:
+        - git remote add blih git@git.epitech.eu:/paul.tardivel@epitech.eu/PSU_navy_2018
+        - git fetch blih
+        - git push blih origin/master:refs/heads/master
 
 stages:
   - Build
   - Tests
   - name: Deployment
     if: branch = master
+    if: type != cron
