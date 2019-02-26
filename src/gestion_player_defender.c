@@ -47,7 +47,7 @@ void get_position(char *position, info_t *info)
 {
     int i = 0;
 
-    while (position[i] != '\0') {
+    while (i < 32) {
         info->nb_replace = position[i];
         i += 2;
         if (position[i] == position[i + 3]) {
