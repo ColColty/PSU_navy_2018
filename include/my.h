@@ -50,5 +50,8 @@ int send_attack(transmissions_t *trans, connection_t *com);
 void send_hit_missed(transmissions_t *trans, connection_t *com, info_t *player);
 int recieve_hit_missed(transmissions_t *trans);
 int touch_or_not(char *input, info_t *player, connection_t *com);
+int game_condition(info_t *player);
+void free_everything(player_t *player);
+int error_handle(int argc, char **argv);
 
 #endif
