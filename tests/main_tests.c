@@ -6,7 +6,6 @@
 */
 
 #include "my.h"
-#include "tests.h"
 #include <criterion/criterion.h>
 
 Test(basic_tests, test_less_arguments)
@@ -87,4 +86,16 @@ Test(basic_tests, test_arguments_for_p1_bad_in_data_file)
 
     ret = error_handle(argc, argv);
     cr_assert_eq(ret, 1);
+}/*
+** EPITECH PROJECT, 2018
+** TEST
+** File description:
+** test
+*/
+
+#include <criterion/criterion.h>
+
+Test(test_unitaire, test_action)
+{
+    
 }
