@@ -18,14 +18,6 @@ int switch_line(char *buffer, int i)
     else
         return (i);
 }
-//2:B1:B2
-int check_size_boat(char *buffer)
-{
-    while (buffer[i] != '\0') {
-        if (buffer[i + 3] != buffer[i + 5])
-        else if ()
-    }
-}
 
 int check_double_point(char *buffer)
 {
