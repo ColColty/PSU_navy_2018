@@ -28,6 +28,7 @@ TESTS	=	$(TEST_SRC)/main_tests.c	\
 	$(TEST_SRC)/transmission_tests.c	\
 	$(TEST_SRC)/free_tests.c	\
 	$(TEST_SRC)/player_tests.c	\
+	$(TEST_SRC)/hit_missed_tests.c	\
 
 NAME	=	navy
 
