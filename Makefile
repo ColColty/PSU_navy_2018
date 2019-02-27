@@ -27,6 +27,7 @@ SRC	=	$(SRC_DIR)/navy.c	\
 TESTS	=	$(TEST_SRC)/main_tests.c	\
 	$(TEST_SRC)/transmission_tests.c	\
 	$(TEST_SRC)/free_tests.c	\
+	$(TEST_SRC)/player_tests.c	\
 
 NAME	=	navy
 
