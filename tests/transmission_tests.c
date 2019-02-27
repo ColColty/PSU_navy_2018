@@ -41,26 +41,6 @@ Test(transmission_tests, sending_a_signal_without_success)
     cr_assert_eq(ret, -1);
 }
 
-Test(transmission_tests, recieving_signals)
-{
-    connection_t com = {0, 9970};
-    transmissions_t trans = {0, "01000001", "F1", "G3"};
-    char *ret = NULL;
-    int pid = 0;
-    int subpid = 0;
-
-    com.pid = getpid();
-    subpid = fork();
-    if (subpid == 0) {
-        com.attack_pid = com.pid;
-        usleep(1000);
-        send_signal(&com, &trans);
-    } else {
-        ret = recieve_signal(&com, &trans);
-    }
-    cr_assert_str_eq(ret, "F1");
-}
-
 Test(transmission_tests, sending_letter_and_number)
 {
     connection_t com = {0, 9970};
