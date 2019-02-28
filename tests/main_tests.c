@@ -87,3 +87,13 @@ Test(basic_tests, test_arguments_for_p1_bad_in_data_file)
     ret = error_handle(argc, argv);
     cr_assert_eq(ret, 1);
 }
+
+Test(basic_tests, test_arguments_letter_pid)
+{
+    int argc = 3;
+    char *argv[] = {"./navy", "testing", "pos2", NULL};
+    int ret = -1;
+
+    ret = error_handle(argc, argv);
+    cr_assert_eq(ret, 1);
+}
