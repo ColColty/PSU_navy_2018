@@ -11,7 +11,7 @@
 
 int switch_line(char *buffer, int i)
 {
-    while(buffer[i] != '\n')
+    while (buffer[i] != '\n')
         i++;
     i += 1;
     if (buffer[i + 1] == '\0')
@@ -24,11 +24,14 @@ int check_double_point(char *buffer)
 {
     int i = 0;
 
+
+    if (check_content(buffer) != 32)
+        return (1);
     while (buffer[i] != '\0') {
         if (buffer[i + 1] == ':' && buffer[i + 4] == ':')
             i = switch_line(buffer, i);
         else
-            return (-1);
+            return (1);
     }
     return (0);
 }
@@ -63,10 +66,6 @@ int main_error_gestion(char *pathfile)
     read(fd, buffer, 32);
     close(fd);
     buffer[32] = '\0';
-    if (check_content(buffer) != 32) {
-        free(buffer);
-        return (1);
-    }
     if (check_double_point(buffer)) {
         free(buffer);
         return (1);
@@ -74,7 +73,6 @@ int main_error_gestion(char *pathfile)
     free(buffer);
     return (0);
 }
-
 
 int error_handle(int argc, char **argv)
 {
