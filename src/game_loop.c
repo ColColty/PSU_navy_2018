@@ -27,6 +27,7 @@ int recup_entry(transmissions_t *trans)
     }
     str[2] = '\0';
     if (verif_input(str)) {
+        free(str);
         my_putstr("attack: ");
         return (recup_entry(trans));
     }
