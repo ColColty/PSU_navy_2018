@@ -84,6 +84,9 @@ int error_handle(int argc, char **argv)
         if (main_error_gestion(argv[1]))
             return (1);
     } else if (argc == 3) {
+        for (int i = 0; argv[1][i] != '\0'; i++)
+            if (argv[1][i] > 57 || argv[1][i] < 48)
+                return (1);
         if (main_error_gestion(argv[2]))
             return (1);
         if (kill(my_atoi(argv[1]), SIGCONT) == -1)

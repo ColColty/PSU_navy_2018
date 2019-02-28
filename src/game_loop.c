@@ -13,11 +13,11 @@ int recup_entry(transmissions_t *trans)
     char *str = malloc(sizeof(char) * 3);
     int size = 0;
 
-    while ((size = read(0, str, 128)) != 3)
-        my_putstr("attack: ");
-        if (size == 0) {
+    while ((size = read(0, str, 3)) != 3) {
+        if (size == 0)
             return (-1);
-        }
+        my_putstr("attack: ");
+    }
     str[2] = '\0';
     trans->user_input = str;
     return (0);
