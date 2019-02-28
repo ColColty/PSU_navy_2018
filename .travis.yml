@@ -25,12 +25,16 @@ jobs:
       script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make"
     - stage: Tests
       name: "Basic Tests"
-      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./basic_tests.sh navy"
+      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./tests/basic_tests.sh navy"
     - script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make tests_run"
       name: "Make the tests"
     - stage: Deployment
       name: "Push to blih repo"
-      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./deploy.sh"
+      script:
+        - ssh-keyscan -H git.epitech.eu >> ~/.ssh/known_hosts
+        - git remote add blih git@git.epitech.eu:/paul.tardivel@epitech.eu/PSU_navy_2018
+        - git fetch --all
+        - git push blih origin/master:refs/heads/master
 
 stages:
   - Build
