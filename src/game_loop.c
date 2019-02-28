@@ -8,17 +8,28 @@
 #include "my.h"
 #include "transmission.h"
 
+int verif_input(char *str)
+{
+    if ((str[1] <= 48 || str[1] > 56) || (str[0] < 65 || str[0] > 72))
+        return (1);
+    return (0);
+}
+
 int recup_entry(transmissions_t *trans)
 {
     char *str = malloc(sizeof(char) * 3);
     int size = 0;
 
-    while ((size = read(0, str, 3)) != 3) {
+    while ((size = read(0, str, 3)) < 3) {
         if (size == 0)
             return (-1);
         my_putstr("attack: ");
     }
     str[2] = '\0';
+    if (verif_input(str)) {
+        my_putstr("attack: ");
+        return (recup_entry(trans));
+    }
     trans->user_input = str;
     return (0);
 }

@@ -38,7 +38,7 @@ int check_content(char *buffer)
     int i = 0;
 
     while (buffer[i] != '\0') {
-        if ((buffer[i] >= 48 && buffer[i] <= 56)
+        if ((buffer[i] > 48 && buffer[i] <= 56)
         || buffer[i] == ':' || (buffer[i] >= 65 && buffer[i] <= 72)
         || buffer[i] == '\n')
             i++;

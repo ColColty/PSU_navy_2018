@@ -10,7 +10,7 @@
 
 volatile signal_t global_sig = {0, "00"};
 
-transmissions_t array[16][8] = {
+transmissions_t inputs_binaries[16][8] = {
     {'A', "01000001", NULL, NULL},
     {'B', "01000010", NULL, NULL},
     {'C', "01000011", NULL, NULL},
@@ -39,8 +39,8 @@ void binary_interpreter(char *number)
     static int k = 0;
 
     for (int i = 0; i < 16; i++)
-        if (!my_strcmp(number, array[i]->binary_correspond))
-            global_sig.attacant_move[k++] = array[i]->character;
+        if (!my_strcmp(number, inputs_binaries[i]->binary_correspond))
+            global_sig.attacant_move[k++] = inputs_binaries[i]->character;
     if (k > 1) {
         global_sig.attacant_move[2] = '\0';
         k = 0;
@@ -56,10 +56,10 @@ void recupering_global(connection_t *connect, transmissions_t *trans)
 static int signal_send_character(connection_t *com, int i)
 {
     for (int k = 0; k < 8; k++) {
-        if (array[i]->binary_correspond[k] == '0') {
+        if (inputs_binaries[i]->binary_correspond[k] == '0') {
             if (kill(com->attack_pid, SIGUSR1) == -1)
                 return (-1);
-        } else if (array[i]->binary_correspond[k] == '1')
+        } else if (inputs_binaries[i]->binary_correspond[k] == '1')
             if (kill(com->attack_pid, SIGUSR2) == -1)
                 return (-1);
         usleep(1000);
@@ -70,7 +70,7 @@ static int signal_send_character(connection_t *com, int i)
 int signal_character_finder(connection_t *com, char character)
 {
     for (int i = 0; i < 16; i++)
-        if (character == array[i]->character)
+        if (character == inputs_binaries[i]->character)
             if (signal_send_character(com, i) == -1)
                 return (-1);
     return (0);
