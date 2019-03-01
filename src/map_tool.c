@@ -28,7 +28,7 @@ void print_hud(player_t *player)
     print_the_map(player->player_enemy.map);
 }
 
-char *create_the_map(void)
+char **create_the_map(void)
 {
     char **map = malloc(sizeof(char *) * 8);
     int k = 0;

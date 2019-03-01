@@ -32,11 +32,11 @@ int recieve_hit_missed(transmissions_t *trans)
     return (0);
 }
 
-void send_hit_missed(transmissions_t *trans, connection_t *com, info_t *player)
+int send_hit_missed(transmissions_t *trans, connection_t *com, info_t *player)
 {
     usleep(1000);
     my_putstr(trans->attacant_input);
-    touch_or_not(trans->attacant_input, player, com);
+    return (touch_or_not(trans->attacant_input, player, com));
 }
 
 int send_attack(transmissions_t *trans, connection_t *com)
