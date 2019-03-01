@@ -70,6 +70,8 @@ void get_position(char *position, info_t *info)
 int gestion_first_player(info_t *player, char *buffer)
 {
     player->map = create_the_map();
+    if (player->map == NULL)
+        return (-1);
     get_position(buffer, player);
     return (0);
 }

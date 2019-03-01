@@ -6,7 +6,6 @@
 */
 
 #include "my.h"
-#include "map.h"
 
 int print_usage(void)
 {
@@ -20,14 +19,7 @@ int print_usage(void)
     return (0);
 }
 
-int error_handle(int argc, char * const * argv)
-{
-    if (argc < 2)
-        return (1);
-    return (0);
-}
-
-int main(int argc, char * const * argv)
+int main(int argc, char **argv)
 {
     int ret = 0;
 

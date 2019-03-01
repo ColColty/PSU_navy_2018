@@ -25,7 +25,7 @@ jobs:
       script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make"
     - stage: Tests
       name: "Basic Tests"
-      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./basic_tests.sh navy"
+      script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./tests/basic_tests.sh navy"
     - script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make tests_run"
       name: "Make the tests"
     - stage: Deployment
@@ -41,4 +41,4 @@ stages:
   - Tests
   - name: Deployment
     if: branch = master
-    if: type != cron
+    NOT type = cron
