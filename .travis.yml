@@ -41,4 +41,3 @@ stages:
   - Tests
   - name: Deployment
     if: branch = master
-    NOT type = cron
