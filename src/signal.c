@@ -55,14 +55,21 @@ void recupering_global(connection_t *connect, transmissions_t *trans)
 
 static int signal_send_character(connection_t *com, int i)
 {
+    struct sigaction sa = {0};
+    int ret = 0;
+
+    sa.sa_flags = SA_SIGINFO;
+    sa.sa_sigaction = get_attack_pid;
     for (int k = 0; k < 8; k++) {
+        sigaction(SIGCONT, &sa, NULL);
+        if ((ret = usleep(1000000)) != -1)
+            k--;
         if (inputs_binaries[i]->binary_correspond[k] == '0') {
             if (kill(com->attack_pid, SIGUSR1) == -1)
                 return (-1);
         } else if (inputs_binaries[i]->binary_correspond[k] == '1')
             if (kill(com->attack_pid, SIGUSR2) == -1)
                 return (-1);
-        usleep(1000);
     }
     return (0);
 }
@@ -70,8 +77,10 @@ static int signal_send_character(connection_t *com, int i)
 int signal_character_finder(connection_t *com, char character)
 {
     for (int i = 0; i < 16; i++)
-        if (character == inputs_binaries[i]->character)
+        if (character == inputs_binaries[i]->character) {
+            kill(com->attack_pid, SIGCONT);
             if (signal_send_character(com, i) == -1)
                 return (-1);
+        }
     return (0);
 }

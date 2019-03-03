@@ -19,7 +19,7 @@ static void hit_or_loose(int sig, siginfo_t *info, void *context)
 
 int recieve_hit_missed(transmissions_t *trans)
 {
-    struct sigaction sa;
+    struct sigaction sa = {0};;
     int sig[2] = {10, 12};
 
     my_putstr(trans->user_input);
@@ -34,7 +34,7 @@ int recieve_hit_missed(transmissions_t *trans)
 
 int send_hit_missed(transmissions_t *trans, connection_t *com, info_t *player)
 {
-    usleep(1000);
+    usleep(100000);
     my_putstr(trans->attacant_input);
     return (touch_or_not(trans->attacant_input, player, com));
 }
