@@ -32,6 +32,46 @@ int check_double_point(char *buffer)
     return (0);
 }
 
+int check_nbr(int save, int choice, char *buffer, int i)
+{
+    int temp = 0;
+
+    if (save >= 2 && save<= 5 && save != temp && choice == 0) {
+                temp = save;
+                i = switch_line(buffer, i);
+            }
+            else
+                return (1);
+    if (save + 1 >= 2 && save + 1 <= 5 && save + 1 != temp && choice == 1) {
+                temp = save;
+                i = switch_line(buffer, i);
+            }
+            else
+                return (1);
+    return (i);
+}
+
+int check_boat_size(char *buffer)
+{
+    int i = 0;
+    int save = 0;
+
+    while (buffer[i] != '\0') {
+        if (buffer[i + 2] == buffer[i + 5]) {
+            save = (((buffer[i + 6] - 48) - (buffer[i + 3] - 48)) + 1);
+            my_put_nbr(save);
+            if (check_nbr(save, 0, buffer, i) == 1)
+                return (1);
+        }
+        else {
+            save = ((buffer[i + 5] - buffer[i + 2]) + 1) - 65;
+            if (check_nbr(save, 1, buffer, i) == 1)
+                return (1);
+        }
+    }
+    return (0);
+}
+
 int check_content(char *buffer)
 {
     int i = 0;
@@ -61,6 +101,8 @@ int main_error_gestion(char *pathfile)
     if (check_content(buffer) != 32)
         return (1);
     if (check_double_point(buffer) != 0)
+        return (1);
+    if (check_boat_size(buffer) != 0)
         return (1);
     free(buffer);
     return (0);
