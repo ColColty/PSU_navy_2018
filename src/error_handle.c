@@ -14,8 +14,8 @@ int switch_line(char *buffer, int i)
     while (buffer[i] != '\n')
         i++;
     i += 1;
-    if (buffer[i + 1] == '\0')
-        return (i + 1);
+    if (buffer[i] == '\0')
+        return (i);
     else
         return (i);
 }
@@ -55,17 +55,19 @@ int main_error_gestion(char *pathfile)
 {
     int fd = open(pathfile, O_RDONLY);
     char *buffer = NULL;
+    int size = 0;
 
     if (fd == -1)
         return (1);
-    if ((buffer = malloc(sizeof(char) * 32)) == NULL) {
+    if ((buffer = malloc(sizeof(char) * 33)) == NULL) {
         close(fd);
         free(buffer);
         return (1);
     }
-    read(fd, buffer, 32);
+    if ((size = read(fd, buffer, 32)) == -1)
+        return (1);
     close(fd);
-    buffer[32] = '\0';
+    buffer[size] = '\0';
     if (check_double_point(buffer)) {
         free(buffer);
         return (1);
