@@ -12,7 +12,7 @@ void get_attack_pid(int signum);
 
 void connect_to_player(connection_t *connect, transmissions_t *trans)
 {
-    struct sigaction sa;
+    struct sigaction sa = {0};;
 
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = get_attack_pid;

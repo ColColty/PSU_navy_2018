@@ -55,7 +55,7 @@ void recupering_global(connection_t *connect, transmissions_t *trans)
 
 static int signal_send_character(connection_t *com, int i)
 {
-    struct sigaction sa;
+    struct sigaction sa = {0};
 
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = get_attack_pid;
@@ -67,8 +67,7 @@ static int signal_send_character(connection_t *com, int i)
             if (kill(com->attack_pid, SIGUSR2) == -1)
                 return (-1);
         sigaction(SIGCONT, &sa, NULL);
-        pause();
-        usleep(1000);
+        usleep(10000);
     }
     return (0);
 }

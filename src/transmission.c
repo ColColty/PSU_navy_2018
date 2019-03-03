@@ -36,7 +36,7 @@ char *signal_decoder(int sig, siginfo_t *info, void *context)
 
 char *recieve_signal(connection_t *com, transmissions_t *trans)
 {
-    struct sigaction sa;
+    struct sigaction sa = {0};;
     int sig[2] = {10, 12};
 
     my_putstr("\nwaiting for enemy's attack...\n");

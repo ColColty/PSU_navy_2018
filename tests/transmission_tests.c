@@ -48,7 +48,7 @@ Test(transmission_tests, sending_letter_and_number)
     int ret = 0;
     int pid = 0;
     int subpid = 0;
-    struct sigaction sa;
+    struct sigaction sa = {0};;
     int sigs[2] = {10, 12};
 
     com.pid = getpid();
@@ -56,9 +56,12 @@ Test(transmission_tests, sending_letter_and_number)
     if (subpid == 0) {
         sa.sa_flags = SA_SIGINFO;
         sa.sa_sigaction = nothing_to_do;
-        for (int i = 0; i < 16; i++)
+        for (int i = 0; i < 16; i++) {
             for (int i = 0; i < 2; i++)
                 sigaction(sigs[i], &sa, NULL);
+            usleep(1000);
+            kill(com.pid, SIGCONT);
+        }
     } else {
         com.attack_pid = subpid;
         ret = send_signal(&com, &trans);
