@@ -28,6 +28,7 @@ int connect_player1(connection_t *com, transmissions_t *trans)
     my_put_nbr(com->pid);
     my_putstr("\nWaiting for enemy connection...\n\n");
     connect_to_player(com, trans);
+    usleep(1000);
     if (kill(com->attack_pid, SIGUSR1) == -1)
         return (-1);
     my_putstr("enemy connected\n");

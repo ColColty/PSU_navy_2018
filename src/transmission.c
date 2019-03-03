@@ -46,6 +46,7 @@ char *recieve_signal(connection_t *com, transmissions_t *trans)
         for (int k = 0; k < 2; k++)
             sigaction(sig[k], &sa, NULL);
         pause();
+        kill(com->attack_pid, SIGCONT);
     }
     recupering_global(com, trans);
     return (trans->attacant_input);

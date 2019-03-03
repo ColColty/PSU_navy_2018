@@ -21,8 +21,10 @@ int recup_entry(transmissions_t *trans)
     int size = 0;
 
     while ((size = read(0, str, 3)) < 3) {
-        if (size == 0)
+        if (size == 0) {
+            free(str);
             return (-1);
+        }
         my_putstr("attack: ");
     }
     str[2] = '\0';
