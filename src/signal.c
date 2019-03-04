@@ -56,13 +56,12 @@ void recupering_global(connection_t *connect, transmissions_t *trans)
 static int signal_send_character(connection_t *com, int i)
 {
     struct sigaction sa = {0};
-    int ret = 0;
 
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = get_attack_pid;
     for (int k = 0; k < 8; k++) {
         sigaction(SIGCONT, &sa, NULL);
-        if ((ret = usleep(1000000)) != -1)
+        if (usleep(1000000) != -1)
             k--;
         if (inputs_binaries[i]->binary_correspond[k] == '0') {
             if (kill(com->attack_pid, SIGUSR1) == -1)

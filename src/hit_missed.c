@@ -19,7 +19,7 @@ static void hit_or_loose(int sig, siginfo_t *info, void *context)
 
 int recieve_hit_missed(transmissions_t *trans)
 {
-    struct sigaction sa = {0};;
+    struct sigaction sa = {0};
     int sig[2] = {10, 12};
 
     my_putstr(trans->user_input);
