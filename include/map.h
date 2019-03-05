@@ -24,6 +24,7 @@ typedef struct {
     int finish;
     char nb_replace;
     char **map;
+    int temp;
 } info_t;
 
 typedef struct {
