@@ -8,6 +8,7 @@
 #include "map.h"
 #include "my.h"
 #include "error_handle.h"
+#include "transmission.h"
 
 int check_boat(char *buffer, int i, int choice, save_t *save_s)
 {
@@ -101,16 +102,14 @@ int main_error_gestion(char *pathfile)
         close(fd);
         free(buffer);
         return (1);
+    }
+    if (check_content(buffer) != 0)
+        return (1);
     if (verif_file(buffer) != 0)
         return (1);
     if (check_size_boat(buffer, &save_s) != 0)
         return (1);
     close(fd);
-    buffer[size] = '\0';
-    if (check_double_point(buffer)) {
-        free(buffer);
-        return (1);
-    }
     free(buffer);
     return (0);
 }

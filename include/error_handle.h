@@ -14,5 +14,6 @@ typedef struct {
     int nbr_temp;
 } save_t;
 
+int my_atoi_char(char c);
 
 #endif
