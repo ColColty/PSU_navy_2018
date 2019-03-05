@@ -24,8 +24,11 @@ SRC	=	$(SRC_DIR)/navy.c	\
 	$(SRC_DIR)/free.c	\
 	$(SRC_DIR)/error_handle.c \
 
-TESTS	=	$(TEST_SRC)/basic_tests.c	\
+TESTS	=	$(TEST_SRC)/main_tests.c	\
 	$(TEST_SRC)/transmission_tests.c	\
+	$(TEST_SRC)/free_tests.c	\
+	$(TEST_SRC)/player_tests.c	\
+	$(TEST_SRC)/hit_missed_tests.c	\
 
 NAME	=	navy
 
@@ -75,7 +78,7 @@ tests_run:	re
 	gcc -c $(SRC) $(INCLUDE) -DUNIT_TESTS --coverage
 	gcc -c $(TESTS) $(INCLUDE)
 	gcc -o unit_tests *.o -lcriterion -lgcov $(LIB)
-	./basic_tests.sh unit_tests
+	./unit_tests
 	gcovr
 
 %.o:	%.c
