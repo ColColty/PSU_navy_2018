@@ -8,7 +8,7 @@
 #include "transmission.h"
 #include "my.h"
 
-volatile signal_t global_sig = {0, "00"};
+volatile signal_t global_sig = {0, "00", 0};
 
 transmissions_t inputs_binaries[16][8] = {
     {'A', "01000001", NULL, NULL},
@@ -55,32 +55,11 @@ int recupering_global(connection_t *connect, transmissions_t *trans)
     return (global_sig.signal_recieved);
 }
 
-static int signal_send_character(connection_t *com, int i)
+void hit_or_loose(int sig, siginfo_t *info, void *context)
 {
-    struct sigaction sa = {0};
-    int ret = 0;
-
-    sa.sa_flags = SA_SIGINFO;
-    sa.sa_sigaction = get_attack_pid;
-    for (int k = 0; k < 8; k++) {
-        sigaction(SIGUSR1, &sa, NULL);
-        if ((ret = usleep(1000000)) != -1)
-            k--;
-        if (inputs_binaries[i]->binary_correspond[k] == '0') {
-            if (kill(com->attack_pid, SIGUSR1) == -1)
-                return (-1);
-        } else if (inputs_binaries[i]->binary_correspond[k] == '1')
-            if (kill(com->attack_pid, SIGUSR2) == -1)
-                return (-1);
-    }
-    return (0);
-}
-
-int signal_character_finder(connection_t *com, char character)
-{
-    for (int i = 0; i < 16; i++)
-        if (character == inputs_binaries[i]->character)
-            if (signal_send_character(com, i) == -1)
-                return (-1);
-    return (0);
+    global_sig.signal_recieved = sig;
+    if (sig == 12)
+        my_putstr(": hit\n");
+    else if (sig == 10)
+        my_putstr(": missed\n");
 }

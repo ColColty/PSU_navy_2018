@@ -9,15 +9,9 @@
 #include "transmission.h"
 #include "map.h"
 
-static void hit_or_loose(int sig, siginfo_t *info, void *context)
-{
-    if (sig == 12)
-        my_putstr(": hit\n");
-    else if (sig == 10)
-        my_putstr(": missed\n");
-}
+void hit_or_loose(int sig, siginfo_t *info, void *context);
 
-int recieve_hit_missed(transmissions_t *trans, connection_t *com)
+int recieve_hit_missed(transmissions_t *trans, connection_t *com, info_t *player)
 {
     struct sigaction sa = {0};
     int sig[2] = {10, 12};
@@ -31,11 +25,17 @@ int recieve_hit_missed(transmissions_t *trans, connection_t *com)
             return (-1);
     pause();
     ret = recupering_global(com, trans);
+    if (ret == 12)
+        player->map[TRANS(trans->user_input[1]) - 1][TRANS(trans->user_input[0]) * 2] = 'x';
+    else if (ret == 10)
+        player->map[TRANS(trans->user_input[1]) - 1][TRANS(trans->user_input[0]) * 2] = 'o';
     return (0);
 }
 
 int send_hit_missed(transmissions_t *trans, connection_t *com, info_t *player)
 {
+    int ret = 0;
+
     usleep(100000);
     my_putstr(trans->attacant_input);
     return (touch_or_not(trans->attacant_input, player, com));
