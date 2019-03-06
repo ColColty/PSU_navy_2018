@@ -35,6 +35,6 @@ int main(int argc, char **argv)
     else if (ret == 2)
         return (1);
     else
-        return (2);
+        return (ret);
     return (0);
 }
