@@ -31,6 +31,10 @@ int main(int argc, char **argv)
     }
     ret = navy(argc, argv);
     if (ret == 1)
+        return (84);
+    else if (ret == 2)
         return (1);
+    else
+        return (ret);
     return (0);
 }

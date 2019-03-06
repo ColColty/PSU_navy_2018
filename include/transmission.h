@@ -14,6 +14,7 @@
 typedef struct signal_s {
     int pid_attacant;
     char attacant_move[3];
+    int signal_recieved;
 } signal_t;
 
 #endif /* !SIGNAL_H_ */
