@@ -48,7 +48,8 @@ int game_loop_p1(connection_t *com, transmissions_t *trans,  player_t *player);
 int recup_entry(transmissions_t *trans);
 int send_attack(transmissions_t *trans, connection_t *com);
 int send_hit_missed(transmissions_t *trans, connection_t *com, info_t *player);
-int recieve_hit_missed(transmissions_t *trans, connection_t *com, info_t *player);
+int recieve_hit_missed(transmissions_t *trans,
+connection_t *com, info_t *player);
 int touch_or_not(char *input, info_t *player, connection_t *com);
 int game_condition(info_t *player, connection_t *com);
 int free_everything(player_t *player);

@@ -43,10 +43,8 @@ int game_condition(info_t *player, connection_t *com)
     for (int i = 0; player->map[i] != NULL; i++)
         for (int k = 0; player->map[i][k] != '\0'; k++)
             if (player->map[i][k] >= '1' && player->map[i][k] <= '9') {
-                kill(com->attack_pid, SIGUSR1);
                 return (1);
             }
     my_putstr("I won");
-    kill(com->attack_pid, SIGUSR2);
     return (0);
 }
