@@ -87,7 +87,7 @@ int error_handle(int argc, char **argv)
                 return (1);
         if (main_error_gestion(argv[2]))
             return (1);
-        if (kill(my_atoi(argv[1]), SIGCONT) == -1)
+        if (kill(my_atoi(argv[1]), SIGUSR1) == -1)
             return (1);
     }
     return (0);

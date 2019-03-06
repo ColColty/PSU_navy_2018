@@ -8,7 +8,7 @@
 #include "transmission.h"
 #include "my.h"
 
-volatile signal_t global_sig = {0, "00"};
+volatile signal_t global_sig = {0, "00", 0};
 
 transmissions_t inputs_binaries[16][8] = {
     {'A', "01000001", NULL, NULL},
@@ -32,6 +32,7 @@ transmissions_t inputs_binaries[16][8] = {
 void get_attack_pid(int sig, siginfo_t *info, void *context)
 {
     global_sig.pid_attacant = info->si_pid;
+    global_sig.signal_recieved = sig;
 }
 
 void binary_interpreter(char *number)
@@ -47,31 +48,18 @@ void binary_interpreter(char *number)
     }
 }
 
-void recupering_global(connection_t *connect, transmissions_t *trans)
+int recupering_global(connection_t *connect, transmissions_t *trans)
 {
     connect->attack_pid = (int) global_sig.pid_attacant;
     trans->attacant_input = (char *) global_sig.attacant_move;
+    return (global_sig.signal_recieved);
 }
 
-static int signal_send_character(connection_t *com, int i)
+void hit_or_loose(int sig, siginfo_t *info, void *context)
 {
-    for (int k = 0; k < 8; k++) {
-        if (inputs_binaries[i]->binary_correspond[k] == '0') {
-            if (kill(com->attack_pid, SIGUSR1) == -1)
-                return (-1);
-        } else if (inputs_binaries[i]->binary_correspond[k] == '1')
-            if (kill(com->attack_pid, SIGUSR2) == -1)
-                return (-1);
-        usleep(1000);
-    }
-    return (0);
-}
-
-int signal_character_finder(connection_t *com, char character)
-{
-    for (int i = 0; i < 16; i++)
-        if (character == inputs_binaries[i]->character)
-            if (signal_send_character(com, i) == -1)
-                return (-1);
-    return (0);
+    global_sig.signal_recieved = sig;
+    if (sig == 12)
+        my_putstr(": hit\n");
+    else if (sig == 10)
+        my_putstr(": missed\n");
 }

@@ -21,8 +21,10 @@ int recup_entry(transmissions_t *trans)
     int size = 0;
 
     while ((size = read(0, str, 3)) < 3) {
-        if (size == 0)
+        if (size == 0) {
+            free(str);
             return (-1);
+        }
         my_putstr("attack: ");
     }
     str[2] = '\0';
@@ -39,7 +41,7 @@ int game_loop_p1(connection_t *com, transmissions_t *trans,  player_t *player)
 {
     if (send_attack(trans, com) == -1)
         return (-1);
-    if (recieve_hit_missed(trans) == -1)
+    if (recieve_hit_missed(trans, com, &player->player_enemy) == -1)
         return (-1);
     recieve_signal(com, trans);
     send_hit_missed(trans, com, &player->player_defender);
@@ -56,7 +58,7 @@ int game_loop_p2(connection_t *com, transmissions_t *trans,  player_t *player)
     send_hit_missed(trans, com, &player->player_defender);
     if (send_attack(trans, com) == -1)
         return (-1);
-    if (recieve_hit_missed(trans) == -1)
+    if (recieve_hit_missed(trans, com, &player->player_enemy) == -1)
         return (-1);
     print_hud(player);
     free(trans->user_input);
