@@ -32,6 +32,7 @@ transmissions_t inputs_binaries[16][8] = {
 void get_attack_pid(int sig, siginfo_t *info, void *context)
 {
     global_sig.pid_attacant = info->si_pid;
+    global_sig.signal_recieved = sig;
 }
 
 void binary_interpreter(char *number)
@@ -47,10 +48,11 @@ void binary_interpreter(char *number)
     }
 }
 
-void recupering_global(connection_t *connect, transmissions_t *trans)
+int recupering_global(connection_t *connect, transmissions_t *trans)
 {
     connect->attack_pid = (int) global_sig.pid_attacant;
     trans->attacant_input = (char *) global_sig.attacant_move;
+    return (global_sig.signal_recieved);
 }
 
 static int signal_send_character(connection_t *com, int i)
@@ -61,7 +63,7 @@ static int signal_send_character(connection_t *com, int i)
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = get_attack_pid;
     for (int k = 0; k < 8; k++) {
-        sigaction(SIGCONT, &sa, NULL);
+        sigaction(SIGUSR1, &sa, NULL);
         if ((ret = usleep(1000000)) != -1)
             k--;
         if (inputs_binaries[i]->binary_correspond[k] == '0') {
@@ -77,10 +79,8 @@ static int signal_send_character(connection_t *com, int i)
 int signal_character_finder(connection_t *com, char character)
 {
     for (int i = 0; i < 16; i++)
-        if (character == inputs_binaries[i]->character) {
-            kill(com->attack_pid, SIGCONT);
+        if (character == inputs_binaries[i]->character)
             if (signal_send_character(com, i) == -1)
                 return (-1);
-        }
     return (0);
 }

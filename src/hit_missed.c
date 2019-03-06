@@ -17,10 +17,11 @@ static void hit_or_loose(int sig, siginfo_t *info, void *context)
         my_putstr(": missed\n");
 }
 
-int recieve_hit_missed(transmissions_t *trans)
+int recieve_hit_missed(transmissions_t *trans, connection_t *com)
 {
-    struct sigaction sa = {0};;
+    struct sigaction sa = {0};
     int sig[2] = {10, 12};
+    int ret = 0;
 
     my_putstr(trans->user_input);
     sa.sa_flags = SA_SIGINFO;
@@ -29,6 +30,7 @@ int recieve_hit_missed(transmissions_t *trans)
         if (sigaction(sig[i], &sa, NULL) == -1)
             return (-1);
     pause();
+    ret = recupering_global(com, trans);
     return (0);
 }
 

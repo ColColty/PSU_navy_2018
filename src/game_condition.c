@@ -16,11 +16,13 @@ int touch_or_not(char *coor, info_t *player, connection_t *com)
         my_putstr(": hit\n");
         if (kill(com->attack_pid, SIGUSR2) == -1)
             return (-1);
+        player->map[TRANS(coor[1]) - 1][TRANS(coor[0]) * 2] = 'x';
         return (0);
     }
     my_putstr(": missed\n");
     if (kill(com->attack_pid, SIGUSR1) == -1)
         return (-1);
+    player->map[TRANS(coor[1]) - 1][TRANS(coor[0]) * 2] = 'o';
     return (1);
 }
 

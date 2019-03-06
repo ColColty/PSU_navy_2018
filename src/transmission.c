@@ -12,6 +12,7 @@ void get_attack_pid(int sig, siginfo_t *info, void *context);
 
 int send_signal(connection_t *com, transmissions_t *trans)
 {
+    kill(com->attack_pid, SIGUSR1);
     if (signal_character_finder(com, trans->user_input[0]) == -1
     || signal_character_finder(com, trans->user_input[1]) == -1)
         return (-1);
@@ -38,21 +39,20 @@ char *signal_decoder(int sig, siginfo_t *info, void *context)
 
 char *recieve_signal(connection_t *com, transmissions_t *trans)
 {
-    struct sigaction sa = {0};;
+    struct sigaction sa = {0};
     int sig[2] = {10, 12};
 
     my_putstr("\nwaiting for enemy's attack...\n");
     sa.sa_flags = SA_SIGINFO;
     sa.sa_sigaction = get_attack_pid;
-    sigaction(SIGCONT, &sa, NULL);
+    sigaction(SIGUSR1, &sa, NULL);
     sa.sa_sigaction = signal_decoder;
     pause();
-    kill(com->attack_pid, SIGCONT);
     for (int i = 0; i < 16; i++) {
+        kill(com->attack_pid, SIGUSR1);
         for (int k = 0; k < 2; k++)
             sigaction(sig[k], &sa, NULL);
         pause();
-        kill(com->attack_pid, SIGCONT);
     }
     recupering_global(com, trans);
     return (trans->attacant_input);
