@@ -31,7 +31,7 @@ int check_boat(char *buffer, int i, int choice, save_t *save_s)
             return (0);
         }
     }
-}   
+}
 
 int check_size_boat(char *buffer, save_t *save_s)
 {
@@ -40,20 +40,21 @@ int check_size_boat(char *buffer, save_t *save_s)
 
     save_s->nbr_save = 1;
     save_s->letter_save = 1;
-    while (buffer[i] != '\0') {
+    while (buffer[i] != '\0')
         if (buffer[i + 2] >= 65 && buffer[i + 2] <= 72
-        && my_atoi_char(buffer[i + 3]) >= 1 && my_atoi_char(buffer[i + 3]) <= 8) {
+        && my_atoi_char(buffer[i + 3]) >= 1
+        && my_atoi_char(buffer[i + 3]) <= 8) {
             save_letter = buffer[i + 2];
-            if (buffer[i + 5] == save_letter && check_boat(buffer, i, 1, save_s) == 0)
+            if (buffer[i + 5] == save_letter
+            && check_boat(buffer, i, 1, save_s) == 0)
                 i += 8;
-            else if (buffer[i + 5] != save_letter && check_boat(buffer, i, 2, save_s) == 0)
+            else if (buffer[i + 5] != save_letter
+            && check_boat(buffer, i, 2, save_s) == 0)
                 i += 8;
-            else 
+            else
                 return (1);
-        }
-        else
+        } else
             return (1);
-    }
     return (0);
 }
 
@@ -63,10 +64,9 @@ int verif_file(char *buffer)
     int i = 0;
 
     while (buffer[i] != '\0') {
-        if (my_atoi_char(buffer[i]) != nbr & buffer[i + 1] != ':' && buffer[i + 4] != ':') {
-            my_put_nbr(i);
+        if (my_atoi_char(buffer[i]) != nbr || buffer[i + 1] != ':'
+        || buffer[i + 4] != ':')
             return (1);
-        }
         else {
             i += 8;
             nbr++;
@@ -103,13 +103,15 @@ int main_error_gestion(char *pathfile)
         free(buffer);
         return (1);
     }
-    if (check_content(buffer) != 0)
+    read(fd, buffer, 32);
+    close(fd);
+    buffer[32] = '\0';
+    if (check_content(buffer) != 32)
         return (1);
     if (verif_file(buffer) != 0)
         return (1);
     if (check_size_boat(buffer, &save_s) != 0)
         return (1);
-    close(fd);
     free(buffer);
     return (0);
 }
