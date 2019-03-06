@@ -6,6 +6,7 @@
 */
 
 #include "my.h"
+#include "transmission.h"
 
 int print_usage(void)
 {
@@ -32,9 +33,7 @@ int main(int argc, char **argv)
     ret = navy(argc, argv);
     if (ret == 1)
         return (84);
-    else if (ret == 2)
+    if (ret == 89)
         return (1);
-    else
-        return (ret);
     return (0);
 }
