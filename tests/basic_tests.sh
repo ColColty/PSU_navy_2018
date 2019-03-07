@@ -38,3 +38,6 @@ test_arguments pos1
 test_arguments 1234 pos2
 test_arguments pos1 | test_arguments `pgrep -fn basic_tests.sh` pos2
 test_arguments data
+test_arguments tests/bad_lenght_2.txt
+test_arguments tests/bad_lenght.txt
+test_arguments tests/bad_data.txt

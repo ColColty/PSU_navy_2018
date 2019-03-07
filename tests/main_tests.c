@@ -97,3 +97,13 @@ Test(basic_tests, test_arguments_letter_pid)
     ret = error_handle(argc, argv);
     cr_assert_eq(ret, 1);
 }
+
+Test(basic_tests, test_testing_boat_bigger_number)
+{
+    int argc = 2;
+    char *argv[] = {"./navy", "tests/bad_lenght_2.txt", NULL};
+    int ret = -1;
+
+    ret = error_handle(argc, argv);
+    cr_assert_eq(ret, 1);
+}
