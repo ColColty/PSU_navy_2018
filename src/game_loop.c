@@ -25,11 +25,13 @@ int recup_entry(transmissions_t *trans)
             free(str);
             return (-1);
         }
+        my_putstr("wrong position\n");
         my_putstr("attack: ");
     }
     str[2] = '\0';
     if (verif_input(str)) {
         free(str);
+        my_putstr("wrong position\n");
         my_putstr("attack: ");
         return (recup_entry(trans));
     }
