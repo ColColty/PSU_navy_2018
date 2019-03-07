@@ -4,3 +4,6 @@ unit_tests
 libmy.a
 *.gc*
 *.json
+pos1
+pos2
+bad_size

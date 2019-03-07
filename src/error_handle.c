@@ -42,6 +42,19 @@ int check_content(char *buffer)
     return (i);
 }
 
+int go_redirection(char *buffer, save_t *save)
+{
+    if (check_content(buffer) != 32)
+        return (1);
+    if (verif_file(buffer) != 0)
+        return (1);
+    if (check_size_boat(buffer, save) != 0)
+        return (1);
+    if (check_correct_size(buffer) != 0)
+        return (1);
+    return (0);
+}
+
 int main_error_gestion(char *pathfile)
 {
     int fd = open(pathfile, O_RDONLY);
@@ -57,11 +70,7 @@ int main_error_gestion(char *pathfile)
     read(fd, buffer, 32);
     close(fd);
     buffer[32] = '\0';
-    if (check_content(buffer) != 32)
-        return (1);
-    if (verif_file(buffer) != 0)
-        return (1);
-    if (check_size_boat(buffer, &save_s) != 0)
+    if (go_redirection(buffer, &save_s) != 0)
         return (1);
     free(buffer);
     return (0);
