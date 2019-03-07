@@ -16,16 +16,16 @@ int check_correct_size(char *buffer)
 
     while (buffer[i] != '\0') {
         if (buffer[i + 2] == buffer[i + 5]) {
-            if (my_atoi_char(buffer[i]) != my_atoi_char(buffer[i + 6]) - my_atoi_char(buffer[i + 3]) + 1) {
-                my_put_nbr(my_atoi_char(buffer[i + 6]) - my_atoi_char(buffer[i + 3]) + 1);
+            if (TRANS(buffer[i]) != TRANS(buffer[i + 6]) - TRANS(buffer[i + 3]) + 1) {
+                my_put_nbr(TRANS(buffer[i + 6]) - TRANS(buffer[i + 3]) + 1);
                 return (1);
             }
             else
                 i += 8;
         }
         else
-            if (my_atoi_char(buffer[i]) != (buffer[i + 5] - 65) - (buffer[i + 2] - 65) + 1) {
-                my_put_nbr(buffer[i]) != (buffer[i + 5] - 65) - (buffer[i + 2] - 65) + 1;
+            if (TRANS(buffer[i]) != (TRANS(buffer[i + 5])) - TRANS(buffer[i + 2]) + 1) {
+                my_put_nbr(buffer[i]) != TRANS(buffer[i + 5]) - TRANS(buffer[i + 2]) + 1;
                 return (1);
             }
             else
@@ -37,7 +37,7 @@ int check_correct_size(char *buffer)
 int check_boat(char *buffer, int i, int choice, save_t *save_s)
 {
     int nbr = TRANS(buffer[i + 6]) - TRANS(buffer[i + 3]) + 1;
-    int letter = (buffer[i + 5] - 65) - (buffer[i + 2] - 65) + 1;
+    int letter = TRANS(buffer[i + 5]) - TRANS(buffer[i + 2]) + 1;
 
     if (choice == 1) {
         if (nbr == save_s->nbr_save)

@@ -12,7 +12,8 @@
 int touch_or_not(char *coor, info_t *player, connection_t *com)
 {
     if (player->map[TRANS(coor[1]) - 1][TRANS(coor[0]) * 2] >= '1'
-    && player->map[TRANS(coor[1]) - 1][TRANS(coor[0]) * 2] <= '9') {
+    && player->map[TRANS(coor[1]) - 1][TRANS(coor[0]) * 2] <= '9'
+    || player->map[TRANS(coor[1]) - 1][TRANS(coor[0]) * 2] == 'x') {
         my_putstr(": hit\n");
         if (kill(com->attack_pid, SIGUSR2) == -1)
             return (-1);
