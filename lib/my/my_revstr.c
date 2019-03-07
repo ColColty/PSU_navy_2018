@@ -18,7 +18,8 @@ char *my_revstr(char *str)
 
     if (str == NULL)
         return (NULL);
-    temp = malloc(sizeof(char) * total_counter);
+    if ((temp = malloc(sizeof(char) * total_counter)) == NULL)
+        return (NULL);
     for (i; i < total_counter; i++)
         temp[i] = str[end--];
     temp[i] = '\0';

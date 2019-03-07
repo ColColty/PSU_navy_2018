@@ -17,8 +17,7 @@ int my_atoi(char *str)
         if (*str >= '0' && *str <= '9') {
             number *= 10;
             number += *str - '0';
-        }
-        else
+        } else
             return (number);
         str++;
     }

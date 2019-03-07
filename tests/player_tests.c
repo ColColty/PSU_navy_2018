@@ -57,4 +57,5 @@ Test(player_tests, recover_ship_pos_and_setting_to_player_bad_file)
 
     ret = recover_ship_position(file, &player);
     cr_assert_eq(ret, -1);
+    free_everything(&player);
 }

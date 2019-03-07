@@ -16,7 +16,7 @@ int verif_file(char *buffer)
     int i = 0;
 
     while (buffer[i] != '\0') {
-        if (my_atoi_char(buffer[i]) != nbr || buffer[i + 1] != ':'
+        if (TRANS(buffer[i]) != nbr || buffer[i + 1] != ':'
         || buffer[i + 4] != ':')
             return (1);
         else {
@@ -63,7 +63,6 @@ int main_error_gestion(char *pathfile)
         return (1);
     if (check_size_boat(buffer, &save_s) != 0)
         return (1);
-    free(buffer);
     return (0);
 }
 

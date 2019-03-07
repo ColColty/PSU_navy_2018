@@ -27,10 +27,10 @@ info_t *player)
     pause();
     ret = recupering_global(com, trans);
     if (ret == 12)
-        player->map[TRANS(trans->user_input[1]) - 1]
+        player->map[TRANS(trans->user_input[1]) - 1]\
         [TRANS(trans->user_input[0]) * 2] = 'x';
     else if (ret == 10)
-        player->map[TRANS(trans->user_input[1]) - 1]
+        player->map[TRANS(trans->user_input[1]) - 1]\
         [TRANS(trans->user_input[0]) * 2] = 'o';
     return (0);
 }
