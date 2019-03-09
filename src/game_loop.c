@@ -39,7 +39,7 @@ int recup_entry(transmissions_t *trans)
     return (0);
 }
 
-int game_loop_p1(connection_t *com, transmissions_t *trans,  player_t *player)
+int game_loop_p1(connection_t *com, transmissions_t *trans, player_t *player)
 {
     int ret = 0;
 
@@ -57,7 +57,7 @@ int game_loop_p1(connection_t *com, transmissions_t *trans,  player_t *player)
     return (ret);
 }
 
-int game_loop_p2(connection_t *com, transmissions_t *trans,  player_t *player)
+int game_loop_p2(connection_t *com, transmissions_t *trans, player_t *player)
 {
     int ret = 0;
 

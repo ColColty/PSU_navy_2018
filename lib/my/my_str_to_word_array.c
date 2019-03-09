@@ -41,7 +41,8 @@ char **my_str_to_word_array(char *str)
 
     tab = malloc(sizeof(char *) * (count_words(str)));
     while (i < count_words(str)) {
-        if ((tab[i] = malloc(sizeof(char) * (my_word_size(str,k)+2))) == NULL)
+        if ((tab[i] = malloc(sizeof(char) * (my_word_size(str, k)+2))) == NULL)
+            return (NULL);
         while (str[k] != ' ' && str[k] != '\0' && str[k] != '\n')
             tab[i][j++] = str[k++];
         tab[i][j] = '\0';

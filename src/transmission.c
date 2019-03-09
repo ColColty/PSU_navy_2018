@@ -8,6 +8,8 @@
 #include "my.h"
 #include "transmission.h"
 
+void get_attack_pid(int sig, siginfo_t *info, void *context);
+
 transmissions_t inputs_binaries_2[16][8] = {
     {'A', "01000001", NULL, NULL},
     {'B', "01000010", NULL, NULL},
@@ -27,13 +29,11 @@ transmissions_t inputs_binaries_2[16][8] = {
     {'8', "00111000", NULL, NULL}
 };
 
-void get_attack_pid(int sig, siginfo_t *info, void *context);
-
 int send_signal(connection_t *com, transmissions_t *trans)
 {
     kill(com->attack_pid, SIGUSR1);
     if (signal_character_finder(com, trans->user_input[0]) == -1
-    || signal_character_finder(com, trans->user_input[1]) == -1)
+        || signal_character_finder(com, trans->user_input[1]) == -1)
         return (-1);
     return (0);
 }

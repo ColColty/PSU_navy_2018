@@ -24,7 +24,7 @@ int recover_ship_position(char *filepath, player_t *player)
     gestion_first_player(&player->player_defender, buffer);
     player->player_enemy.map = create_the_map();
     if (player->player_defender.map == NULL
-    || player->player_enemy.map == NULL)
+        || player->player_enemy.map == NULL)
         return (-1);
     print_hud(player);
     free(buffer);

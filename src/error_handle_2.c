@@ -16,20 +16,18 @@ int check_correct_size(char *buffer)
 
     while (buffer[i] != '\0') {
         if (buffer[i + 2] == buffer[i + 5]) {
-            if (TRANS(buffer[i]) != TRANS(buffer[i + 6]) - TRANS(buffer[i + 3]) + 1) {
-                my_put_nbr(TRANS(buffer[i + 6]) - TRANS(buffer[i + 3]) + 1);
+            if (TRANS(buffer[i])
+                != TRANS(buffer[i + 6]) - TRANS(buffer[i + 3]) + 1)
                 return (1);
-            }
+            else
+                i += 8;
+        } else {
+            if (TRANS(buffer[i])
+                != (TRANS(buffer[i + 5])) - TRANS(buffer[i + 2]) + 1)
+                return (1);
             else
                 i += 8;
         }
-        else
-            if (TRANS(buffer[i]) != (TRANS(buffer[i + 5])) - TRANS(buffer[i + 2]) + 1) {
-                my_put_nbr(buffer[i]) != TRANS(buffer[i + 5]) - TRANS(buffer[i + 2]) + 1;
-                return (1);
-            }
-            else
-                i += 8;
     }
     return (0);
 }
@@ -70,10 +68,10 @@ int check_size_boat(char *buffer, save_t *save_s)
         && TRANS(buffer[i + 3]) <= 8) {
             save_letter = buffer[i + 2];
             if (buffer[i + 5] == save_letter
-            && check_boat(buffer, i, 1, save_s) == 0)
+                && check_boat(buffer, i, 1, save_s) == 0)
                 i += 8;
             else if (buffer[i + 5] != save_letter
-            && check_boat(buffer, i, 2, save_s) == 0)
+                && check_boat(buffer, i, 2, save_s) == 0)
                 i += 8;
             else
                 return (1);

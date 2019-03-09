@@ -30,6 +30,6 @@ int navy(int argc, char * const *argv)
         if ((ret = game_loop_p2(&com, &trans, &player)) == -1)
             return (1);
     }
-   free_everything(&player);
-   return (ret);
+    free_everything(&player);
+    return (ret);
 }

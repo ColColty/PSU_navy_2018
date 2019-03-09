@@ -43,7 +43,7 @@ void binary_interpreter(char *number);
 int recupering_global(connection_t *connect, transmissions_t *trans);
 int signal_character_finder(connection_t *com, char character);
 int game_loop_p2(connection_t *com, transmissions_t *trans, player_t *player);
-int game_loop_p1(connection_t *com, transmissions_t *trans,  player_t *player);
+int game_loop_p1(connection_t *com, transmissions_t *trans, player_t *player);
 int recup_entry(transmissions_t *trans);
 int send_attack(transmissions_t *trans, connection_t *com);
 int send_hit_missed(transmissions_t *trans, connection_t *com, info_t *player);
