@@ -48,7 +48,6 @@ Test(player_tests, recover_ship_pos_and_setting_to_player)
     free_everything(&player);
 }
 
-
 Test(player_tests, recover_ship_pos_and_setting_to_player_bad_file)
 {
     char *file = "data";

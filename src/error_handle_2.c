@@ -17,17 +17,14 @@ int check_correct_size(char *buffer)
     while (buffer[i] != '\0') {
         if (buffer[i + 2] == buffer[i + 5]) {
             if (TRANS(buffer[i])
-                != TRANS(buffer[i + 6]) - TRANS(buffer[i + 3]) + 1)
+            != TRANS(buffer[i + 6]) - TRANS(buffer[i + 3]) + 1)
                 return (1);
-            else
-                i += 8;
         } else {
             if (TRANS(buffer[i])
-                != (TRANS(buffer[i + 5])) - TRANS(buffer[i + 2]) + 1)
+            != (TRANS(buffer[i + 5])) - TRANS(buffer[i + 2]) + 1)
                 return (1);
-            else
-                i += 8;
         }
+        i += 8;
     }
     return (0);
 }
@@ -37,22 +34,14 @@ int check_boat(char *buffer, int i, int choice, save_t *save_s)
     int nbr = TRANS(buffer[i + 6]) - TRANS(buffer[i + 3]) + 1;
     int letter = TRANS(buffer[i + 5]) - TRANS(buffer[i + 2]) + 1;
 
-    if (choice == 1) {
-        if (nbr == save_s->nbr_save)
-            return (1);
-        else {
-            save_s->nbr_save = nbr;
-            return (0);
-        }
+    if (choice == 1 && nbr != save_s->nbr_save) {
+        save_s->nbr_save = nbr;
+        return (0);
+    } else if (choice == 2 && letter != save_s->letter_save) {
+        save_s->letter_save = letter;
+        return (0);
     }
-    if (choice == 2) {
-        if (letter == save_s->letter_save)
-            return (1);
-        else {
-            save_s->letter_save = letter;
-            return (0);
-        }
-    }
+    return (1);
 }
 
 int check_size_boat(char *buffer, save_t *save_s)
