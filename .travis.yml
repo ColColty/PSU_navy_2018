@@ -14,6 +14,7 @@ notifications:
 env:
   global:
     - DOCKER_REPO=epitechcontent/epitest-docker:latest
+    - CODECOV_TOKEN=66b9dce5-a64e-48eb-a8a4-6f10a4ad1d2d
 
 install:
   - docker pull ${DOCKER_REPO}
@@ -41,3 +42,6 @@ stages:
   - Tests
   - name: Deployment
     if: branch = master
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
