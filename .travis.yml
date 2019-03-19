@@ -41,7 +41,7 @@ stages:
   - Build
   - Tests
   - name: Deployment
-    if: branch = master
+    if: branch = deploy
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
