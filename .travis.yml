@@ -27,6 +27,9 @@ jobs:
     - stage: Tests
       name: "Basic Tests"
       script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && ./tests/basic_tests.sh navy"
+      after_success:
+        - bash <(curl -s https://codecov.io/bash)
+        - coveralls --exclude lib --exclude tests --gcov-options
     - script: docker run -v "$PWD:/app" ${DOCKER_REPO} bash -c "cd /app && make tests_run"
       name: "Make the tests"
     - stage: Deployment
@@ -35,13 +38,9 @@ jobs:
         - ssh-keyscan -H git.epitech.eu >> ~/.ssh/known_hosts
         - git remote add blih git@git.epitech.eu:/paul.tardivel@epitech.eu/PSU_navy_2018
         - git fetch --all
-        - git push blih origin/master:refs/heads/master
 
 stages:
   - Build
   - Tests
   - name: Deployment
     if: branch = deploy
-
-after_success:
-  - bash <(curl -s https://codecov.io/bash)
